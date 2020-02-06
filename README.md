@@ -1,4 +1,3 @@
-# CAMAGRU-INSTAGRAM
 ## Camagru - упрощенный Instargram <br>
 
 Проект находится в <b>РАЗРАБОТКЕ</b>
