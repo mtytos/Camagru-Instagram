@@ -71,6 +71,10 @@ ps изначально все написал без AJAX (потому что �
 И чтобы вам не искать, скрины ТЗ закреплены ниже:
 
 ![Image alt](https://github.com/mtytos/CAMAGRU-INSTAGRAM/raw/master/DescriptionScreenshots/MandatoryPart1.png)
+![Image alt](https://github.com/mtytos/CAMAGRU-INSTAGRAM/raw/master/DescriptionScreenshots/MandatoryPart2_3.png)
+![Image alt](https://github.com/mtytos/CAMAGRU-INSTAGRAM/raw/master/DescriptionScreenshots/MandatoryPart4.png)
+![Image alt](https://github.com/mtytos/CAMAGRU-INSTAGRAM/raw/master/DescriptionScreenshots/MandatoryPart5.png)
+![Image alt](https://github.com/mtytos/CAMAGRU-INSTAGRAM/raw/master/DescriptionScreenshots/BonusPart.png)
 
 
 
