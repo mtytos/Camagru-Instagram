@@ -5,7 +5,7 @@ session_start();
 //        header('Location: http://localhost:51555/index.php');
 //        exit;
 //    }
-$sen = 'SenyaPiska';
+$sen = 'test';
 ?>
 <!DOCTYPE html>
 <html lang="ru">
