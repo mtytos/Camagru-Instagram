@@ -26,6 +26,6 @@ session_start();
         <p class="gradient">&copy; Copyright<br>created by student School 21 - Mtytos</p>
     </div>
 </div>
-<script src="script/reset.js"></script>
+<script src="../script/resetAjax.js"></script>
 </body>
 </html>

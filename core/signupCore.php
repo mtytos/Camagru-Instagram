@@ -122,9 +122,11 @@ if ($ok) {
                 $messages[] = 'Incorrect, passwords do not match';
             }
             else {
+                $secret1 = 'Star-9';
+                $password = md5($password . $secret1);
                 $secret2 = 'Wars-9';
                 $token = md5(date("Y-m-d H:i:s") . $secret2);
-                insertUserData($username, $email, $password, $token);
+                insertUserData($username, $email, $password, $token, $db);
                 $ok = true;
                 $messages[] = 'Successful create!';
                 require_once 'Mail.php';
@@ -135,19 +137,22 @@ if ($ok) {
     }
 }
 
-function insertUserData($username, $email, $password, $token) {
-    $secret1 = 'Star-9';
-    $hashPass = md5($password . $secret1);
+function insertUserData($username, $email, $password, $token, $db) {
 
-    $st = $this->db->prepare("INSERT INTO users (username, email, password, status, token, like_alert, comment_alert, profile_alert) VALUES(?, ?, ?, ?, ?, ?, ?, ?)");
+    $status = 0;
+    $like_alert = 1;
+    $comment_alert = 1;
+    $profile_alert = 1;
+
+    $st = $db->prepare("INSERT INTO users (username, email, password, status, token, like_alert, comment_alert, profile_alert) VALUES(?, ?, ?, ?, ?, ?, ?, ?)");
     $st->bindParam(1, $username);
     $st->bindParam(2, $email);
-    $st->bindParam(3, $hashPass);
-    $st->bindParam(4, 1);
+    $st->bindParam(3, $password);
+    $st->bindParam(4, $status);
     $st->bindParam(5, $token);
-    $st->bindParam(6, 1);
-    $st->bindParam(7, 1);
-    $st->bindParam(8, 1);
+    $st->bindParam(6, $like_alert);
+    $st->bindParam(7, $comment_alert);
+    $st->bindParam(8, $profile_alert);
     $st->execute();
 }
 

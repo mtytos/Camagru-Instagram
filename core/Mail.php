@@ -36,9 +36,7 @@ class Mail {
 
         // Отправляем
         if (mail($to, $subject, $message, $headers)) {
-            echo 'good';
-            echo "<br>";
-            echo $to;
+            //echo 'goof';
         }
         else {
             echo 'noting';
@@ -75,9 +73,7 @@ class Mail {
 
         // Отправляем
         if (mail($to, $subject, $message, $headers)) {
-            echo 'good';
-            echo "<br>";
-            echo $to;
+            //echo 'goof';
         }
         else {
             echo 'noting';

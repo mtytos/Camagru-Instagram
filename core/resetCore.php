@@ -1,8 +1,8 @@
 <?php
 
-$DB_DSN = 'mysql:host=127.0.0.1;dbname=ajax';
+$DB_DSN = 'mysql:host=127.0.0.1;dbname=camagru';
 $DB_USER = 'root';
-$DB_PASSWORD = 'Prosto9!';
+$DB_PASSWORD = '';
 
 try {
     $db = new PDO($DB_DSN, $DB_USER, $DB_PASSWORD);
@@ -33,7 +33,7 @@ if (!empty($email) && !filter_var($email, FILTER_VALIDATE_EMAIL)) {
     $messages[] = 'Incorrect email';
 }
 
-$st = $db->prepare("SELECT id FROM users WHERE email = ?");
+$st = $db->prepare("SELECT id_user FROM users WHERE email = ?");
 $st->bindParam(1, $email);
 $st->execute();
 $idNameDB = $st->fetchColumn();
@@ -58,7 +58,7 @@ $statusDB = $st->fetchColumn();
 
 if ($ok) {
     if ($idNameDB && $statusDB === 0 || $statusDB === 1) {
-        $secret = 'Dont_Forgget';
+        $secret = 'Dont_Forget';
         $token = md5(date("Y-m-d H:i:s") . $secret);
 
         //обновляю token 
@@ -67,7 +67,9 @@ if ($ok) {
         $st->bindParam(':email', $email);
         $st->execute();
 
-        sendResetMail($email, $token);
+        require_once 'Mail.php';
+        $action = new Mail;
+        $action->sendResetMail($email, $token);
         $ok = true;
         $messages[] = 'Successful login!';
     } else {

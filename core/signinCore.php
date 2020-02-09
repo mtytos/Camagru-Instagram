@@ -67,6 +67,9 @@ $statusDB = $st->fetchColumn();
 //    echo "<br/>";
 //}
 
+$secret1 = 'Star-9';
+$password = md5($password . $secret1);
+
 if ($ok) {
     if ($idNameDB && $password === $passDB) {
         if ($statusDB == 1) {

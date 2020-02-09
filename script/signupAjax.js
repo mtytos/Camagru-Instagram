@@ -33,7 +33,7 @@ form.submit.addEventListener('click', () => {
 
 function handleResponse (responseObject) {
     if (responseObject.ok) {
-        location.href = 'view/mailInfo.php';
+        location.href = '../view/mailInfo.php';
     }
     else {
         while (form.messages.firstChild) {
