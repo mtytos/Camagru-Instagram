@@ -2,7 +2,7 @@
 session_start();
 
 //    if (!isset($_SESSION['logged'])) {
-//        header('Location: http://localhost:51555/index.php');
+//        header('Location: http://127.0.0.1/index.php');
 //        exit;
 //    }
 $sen = 'test';
@@ -23,14 +23,17 @@ $sen = 'test';
     <div class="logo">
         <p class="gradient">CAMAGRU</p>
     </div>
+    <div class="greetings">
+        <p class="nav">Hello, </p>
+    </div>
     <div class="info">
-        <p>Hello, <?php echo $_SESSION['name']; ?></p>
+        <p class="nav">Online</p>
     </div>
     <div class="options">
-        <p>Options</p>
+        <button id="options" name='action' value='logout'>Options</button>
     </div>
     <div class="exit">
-        <button name='action' value='logout'>Logout</button>
+        <button id="logout" name='action' value='logout'>Logout</button>
     </div>
     <div class="menu">
         <form method='POST' action='action.php'>

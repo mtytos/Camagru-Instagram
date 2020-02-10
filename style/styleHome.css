@@ -12,7 +12,7 @@ body {
     grid-template-columns: repeat(12, 1fr);
     grid-template-rows: 60px 1fr 60px;
     grid-template-areas:
-            "l l l i i i o o o e e e"
+            "l l l g g g i i o o e e"
             "c c c c c c c m m m m m"
             "f f f f f f f f f f f f";
     /*text-align: center;*/
@@ -38,14 +38,26 @@ body {
     text-align: center;
 }
 
+.greetings {
+    grid-area: g;
+    background: rgb(32, 38, 41);
+    color: whitesmoke;
+    /*background: rgb(32, 38, 41);*/
+    /*color: whitesmoke;*/
+    font-size: 14px;
+    font-weight: 500;
+    text-align: center;
+}
+
 .info {
     grid-area: i;
     background: rgb(32, 38, 41);
     color: whitesmoke;
     /*background: rgb(32, 38, 41);*/
     /*color: whitesmoke;*/
-    font-size: 32px;
+    font-size: 14px;
     font-weight: 500;
+    color: #59fa61;
     text-align: center;
 }
 
@@ -55,7 +67,7 @@ body {
     color: whitesmoke;
     /*background: rgb(32, 38, 41);*/
     /*color: whitesmoke;*/
-    font-size: 32px;
+    font-size: 14px;
     font-weight: 500;
     text-align: center;
 }
@@ -66,7 +78,7 @@ body {
     color: whitesmoke;
     /*background: rgb(32, 38, 41);*/
     /*color: whitesmoke;*/
-    font-size: 32px;
+    font-size: 14px;
     font-weight: 500;
     text-align: center;
 }
@@ -148,12 +160,34 @@ button:hover {
     background: rgb(253, 32, 154);
 }
 
+button, 
+button:active, 
+button:focus {
+    outline: none;
+}
+
 .thumb img  {
     border: 2px solid #55c5e9; /* Рамка вокруг фотографии */
     padding: 15px; /* Расстояние от картинки до рамки */
     background: rgb(238, 77, 77); /* Цвет фона */
     margin-right: 10px; /* Отступ справа */
     margin-bottom: 10px; /* Отступ снизу */
+}
+
+#options, #logout {
+    text-align: center;
+    font-size: 14px;
+    width: 100px;
+    background: rgb(32, 38, 41);
+    padding-bottom: 25px;
+}
+
+#options:hover, #logout:hover {
+    background: rgb(32, 38, 41);
+}
+
+.nav {
+    padding-top: 10px;
 }
 
 /* АНИМАЦИЯ КОНТЕНТА */
