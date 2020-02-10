@@ -1,7 +1,3 @@
-<?php
-session_start();
-?>
-
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -17,11 +13,24 @@ session_start();
     <div class="content">
         <div class="main">
             <p>Уведомления о лайках ваших постов</p>
-            <button type="submit" id="btn-like" value="like">
+            <button type="submit" id="btnSubmit" value="like">
                 <?php
                 require_once '../core/OptionClass.php';
                 $act = new Options;
                 if ($act->likeInfo() == 1) {
+                    echo 'Turn off';
+                }
+                else {
+                    echo 'Turn on';
+                } ?>
+            </button>
+            <br/>
+            <p>Уведомления о комментариях ваших постов</p>
+            <button type="submit" id="btnSubmit" value="comment">
+                <?php
+                require_once '../core/OptionClass.php';
+                $act = new Options;
+                if ($act->commentInfo() == 1) {
                     echo 'Turn off';
                 }
                 else {

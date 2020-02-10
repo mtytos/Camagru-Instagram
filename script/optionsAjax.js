@@ -1,6 +1,5 @@
 const form = {
-    password: document.getElementById('email'),
-    submit: document.getElementById('btn-submit'),
+    btnSubmit: document.getElementById('btnSubmit'),
     messages: document.getElementById('form-messages')
 };
 
@@ -21,27 +20,27 @@ form.submit.addEventListener('click', () => {
         }
     };
 
-    const requestData = `email=${form.email.value}`;
+    const requestData = `btnSubmit=${form.btnSubmit.value}`;
 
-    request.open('post', 'core/resetCore.php');
+    request.open('post', 'core/optionsCore.php');
     request.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
     request.send(requestData);
 });
 
 function handleResponse (responseObject) {
     if (responseObject.ok) {
-        location.href = '../view/mailReset.php';
+        // location.href = '../view/mailReset.php';
     }
     else {
-        while (form.messages.firstChild) {
-            form.messages.removeChild(form.messages.firstChild);
-        }
-
-        responseObject.messages.forEach((message) => {
-            const p = document.createElement('p');
-            p.textContent = message;
-            form.messages.appendChild(p);
-        });
+        // while (form.messages.firstChild) {
+        //     form.messages.removeChild(form.messages.firstChild);
+        // }
+        //
+        // responseObject.messages.forEach((message) => {
+        //     const p = document.createElement('p');
+        //     p.textContent = message;
+        //     form.messages.appendChild(p);
+        // });
 
         //form.messages.style.display = "block";
     }
