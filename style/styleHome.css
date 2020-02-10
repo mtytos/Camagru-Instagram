@@ -190,6 +190,11 @@ button:focus {
     padding-top: 10px;
 }
 
+.link-btn {
+    color: whitesmoke;
+    background: rgb(32, 38, 41);
+}
+
 /* АНИМАЦИЯ КОНТЕНТА */
 
 

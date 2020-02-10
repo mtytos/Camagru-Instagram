@@ -24,7 +24,7 @@ form.submit.addEventListener('click', () => {
 
     const requestData = `hash=${form.hash.value}&email=${form.email.value}`;
 
-    request.open('post', 'core/activationCore.php');
+    request.open('post', '../core/activationCore.php');
     request.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
     request.send(requestData);
 });

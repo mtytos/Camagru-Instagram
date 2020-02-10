@@ -30,7 +30,7 @@ $sen = 'test';
         <p class="nav">Online</p>
     </div>
     <div class="options">
-        <button id="options" name='action' value='logout'>Options</button>
+        <button id="options" name='action' value='logout'><a class="link-btn" href="options.php">Options</a></button>
     </div>
     <div class="exit">
         <button id="logout" name='action' value='logout'>Logout</button>

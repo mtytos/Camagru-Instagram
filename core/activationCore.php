@@ -16,7 +16,13 @@ catch (PDOException $e) {
 }
 
 $hash = isset($_POST['hash']) ? $_POST['hash'] : '';
-$username = isset($_POST['email']) ? $_POST['email'] : '';
+$email = isset($_POST['email']) ? $_POST['email'] : '';
+
+//$hash = '01baea2f06c1ae9594e214872c475f4b';
+//$email = 'topic9@mail.ru';
+//echo $hash;
+//echo "<br>";
+
 
 $ok = true;
 $messages = array();
@@ -41,14 +47,20 @@ $st = $db->prepare("SELECT id_user FROM users WHERE email = ?");
 $st->bindParam(1, $email);
 $st->execute();
 $idNameDB = $st->fetchColumn();
+//echo $idNameDB;
+//echo "<br>";
+
 
 $st = $db->prepare("SELECT token FROM users WHERE id_user = ?");
 $st->bindParam(1, $idNameDB);
 $st->execute();
 $tokenDB = $st->fetchColumn();
+//echo $tokenDB;
+//echo "<br>";
+
 
 if ($ok) {
-    if ($hash === $tokenDB) {
+    if ($hash == $tokenDB) {
         $secret = 'Dont_Forget';
         $token = md5(date("Y-m-d H:i:s") . $secret);
 
@@ -61,13 +73,14 @@ if ($ok) {
         $status = 1;
 
         $st = $db->prepare("UPDATE users SET status = :status WHERE id_user = :id");
-        $st->bindParam(':token', $status);
+        $st->bindParam(':status', $status);
         $st->bindParam(':id', $idNameDB);
         $st->execute();
 
         $ok = true;
         $messages[] = 'Successful login!';
-    } else {
+    }
+    else {
         $ok = false;
         $messages[] = 'Ooops, somthng going wrong! Try again.';
     }
