@@ -63,7 +63,7 @@ class Mail {
         $message2 = '<p>Copy this HASH - ' . $token . '</p>';
 
         //ОБЯЗАТЕЛЬНО ИЗМЕНИТЬ ЛОКАЛХОСТ или ДОБАВИТЬ ПОРТЫ ПОД СВОЙ СЕРВЕР
-        $message3 = '<p>And click on this link <a href="http://127.0.0.1/Camagru/view/resetPass.php">reset password</a>.</p>
+        $message3 = '<p>And click on this link <a href="http://127.0.0.1/Camagru/view/newPass.php">reset password</a>.</p>
                     <p>If you not reset password, please, ignoring this message.</p>
                     </body>
                     </html>';

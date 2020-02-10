@@ -1,5 +1,5 @@
 const form = {
-    password: document.getElementById('email'),
+    email: document.getElementById('email'),
     submit: document.getElementById('btn-submit'),
     messages: document.getElementById('form-messages')
 };
@@ -23,7 +23,7 @@ form.submit.addEventListener('click', () => {
 
     const requestData = `email=${form.email.value}`;
 
-    request.open('post', 'core/resetCore.php');
+    request.open('post', '../core/resetCore.php');
     request.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
     request.send(requestData);
 });

@@ -1,11 +1,10 @@
 <?php
-session_start();
+    session_start();
 
-//    if (!isset($_SESSION['logged'])) {
-//        header('Location: http://127.0.0.1/index.php');
-//        exit;
-//    }
-$sen = 'test';
+    if (!isset($_SESSION['logged'])) {
+        header('Location: http://127.0.0.1/Camagru/index.php');
+        exit;
+    }
 ?>
 <!DOCTYPE html>
 <html lang="ru">
@@ -14,7 +13,7 @@ $sen = 'test';
     <title>Camagru</title>
     <link href="../style/styleHome.css" rel="stylesheet">
     <script>
-        var pe = '<?php echo $sen; ?>';
+        var username = '<?php echo $_SESSION['logged']; ?>';
     </script>
     <script src="../script/webcam.js"></script>
 </head>
@@ -24,7 +23,7 @@ $sen = 'test';
         <p class="gradient">CAMAGRU</p>
     </div>
     <div class="greetings">
-        <p class="nav">Hello, </p>
+        <p class="nav">Hello, <?php echo $_SESSION['logged']; ?></p>
     </div>
     <div class="info">
         <p class="nav">Online</p>

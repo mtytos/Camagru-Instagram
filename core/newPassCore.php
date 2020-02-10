@@ -1,5 +1,4 @@
 <?php
-session_start();
 
 $DB_DSN = 'mysql:host=127.0.0.1;dbname=camagru';
 $DB_USER = 'root';
@@ -16,21 +15,18 @@ catch (PDOException $e) {
 //    echo "<br>";
 }
 
+// получаю переменные с данными инпутов
 $hash = isset($_POST['hash']) ? $_POST['hash'] : '';
 $email = isset($_POST['email']) ? $_POST['email'] : '';
-
-//$hash = '01baea2f06c1ae9594e214872c475f4b';
-//$email = 'topic9@mail.ru';
-//echo $hash;
-//echo "<br>";
-
+$password = isset($_POST['password']) ? $_POST['password'] : '';
+$repassword = isset($_POST['repassword']) ? $_POST['repassword'] : '';
 
 $ok = true;
 $messages = array();
 
 if ( !isset($hash) || empty($hash) ) {
     $ok = false;
-    $messages[] = 'Code input cannot be empty!';
+    $messages[] = 'Hash cannot be empty!';
 }
 
 if ( !isset($email) || empty($email) ) {
@@ -44,26 +40,41 @@ if (!empty($email) && !filter_var($email, FILTER_VALIDATE_EMAIL)) {
     $messages[] = 'Incorrect email';
 }
 
+if ( !isset($password) || empty($password) ) {
+    $ok = false;
+    $messages[] = 'Password cannot be empty!';
+}
+
+// Ошибка пароля
+if (!empty($password) && !preg_match('/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{6,}/', $password)) {
+    $ok = false;
+    $messages[] = 'Password should contain one uppercase and lowercase word, one figure and special sign - @$!%*#?&';
+}
+
+if ( !isset($repassword) || empty($repassword) ) {
+    $ok = false;
+    $messages[] = 'Repeat password cannot be empty!';
+}
+
+
 $st = $db->prepare("SELECT id_user FROM users WHERE email = ?");
 $st->bindParam(1, $email);
 $st->execute();
 $idNameDB = $st->fetchColumn();
-//echo $idNameDB;
-//echo "<br>";
-
 
 $st = $db->prepare("SELECT token FROM users WHERE id_user = ?");
 $st->bindParam(1, $idNameDB);
 $st->execute();
 $tokenDB = $st->fetchColumn();
-//echo $tokenDB;
-//echo "<br>";
 
 
 if ($ok) {
-    if ($hash == $tokenDB) {
-        $secret = 'Dont_Forget';
-        $token = md5(date("Y-m-d H:i:s") . $secret);
+    if ($hash == $tokenDB && $password == $repassword) {
+
+        $secret1 = 'Star-9';
+        $password = md5($password . $secret1);
+        $secret2 = 'Wars-9';
+        $token = md5(date("Y-m-d H:i:s") . $secret2);
 
         //обновляю token
         $st = $db->prepare("UPDATE users SET token = :token WHERE id_user = :id");
@@ -71,15 +82,14 @@ if ($ok) {
         $st->bindParam(':id', $idNameDB);
         $st->execute();
 
-        $status = 1;
-
-        $st = $db->prepare("UPDATE users SET status = :status WHERE id_user = :id");
-        $st->bindParam(':status', $status);
+        //обновляю пароль
+        $st = $db->prepare("UPDATE users SET password = :password WHERE id_user = :id");
+        $st->bindParam(':password', $password);
         $st->bindParam(':id', $idNameDB);
         $st->execute();
 
         $ok = true;
-        $messages[] = 'Successful login!';
+        $messages[] = 'Successful password update!';
     }
     else {
         $ok = false;

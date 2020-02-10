@@ -58,7 +58,7 @@
 
             var img = document.createElement('img');
             var link = canvas.toDataURL();
-            var value = pe;
+            var value = username;
             img.setAttribute("src", link);
             img.setAttribute("value", value);
             document.getElementById("try").appendChild(img);

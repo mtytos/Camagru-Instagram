@@ -18,29 +18,10 @@ session_start();
         <div class="main">
             <p>Уведомления о лайках ваших постов</p>
             <button type="submit" id="btn-like" value="like">
-                <?php 
-                if ($like_alert == 1) {
-                    echo 'Turn off';
-                }
-                else {
-                    echo 'Turn on';
-                } ?>
-            </button>
-            <p>Уведомления о комментариях ваших постов</p>
-            <button type="submit" id="btn-comment" value="comment">
-                <?php 
-                if ($like_alert == 1) {
-                    echo 'Turn off';
-                }
-                else {
-                    echo 'Turn on';
-                } ?>
-            </button>
-            <br/>
-            <p>Уведомления об изменении данных пользователя</p>
-            <button type="submit" id="btn-profile" value="profile">
-                <?php 
-                if ($like_alert == 1) {
+                <?php
+                require_once '../core/OptionClass.php';
+                $act = new Options;
+                if ($act->likeInfo() == 1) {
                     echo 'Turn off';
                 }
                 else {

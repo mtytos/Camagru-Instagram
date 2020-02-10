@@ -1,4 +1,5 @@
 <?php
+session_start();
 
 $DB_DSN = 'mysql:host=127.0.0.1;dbname=camagru';
 $DB_USER = 'root';
@@ -15,15 +16,8 @@ catch (PDOException $e) {
 //    echo "<br>";
 }
 
-//  something else
-
 $username = isset($_POST['username']) ? $_POST['username'] : '';
 $password = isset($_POST['password']) ? $_POST['password'] : '';
-
-
-$username = 'milckiway';
-$password = 'Prosto9!';
-
 
 $ok = true;
 $messages = array();
@@ -73,6 +67,7 @@ $password = md5($password . $secret1);
 if ($ok) {
     if ($idNameDB && $password === $passDB) {
         if ($statusDB == 1) {
+            $_SESSION['logged'] = $username;
             $ok = true;
             $messages[] = 'Successful login!';
         }

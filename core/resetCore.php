@@ -19,6 +19,8 @@ catch (PDOException $e) {
 
 $email = isset($_POST['email']) ? $_POST['email'] : '';
 
+//$email = 'topic9@mail.ru';
+
 $ok = true;
 $messages = array();
 
@@ -57,7 +59,7 @@ $statusDB = $st->fetchColumn();
 //}
 
 if ($ok) {
-    if ($idNameDB && $statusDB === 0 || $statusDB === 1) {
+    if ($idNameDB && $statusDB == 0 || $statusDB == 1) {
         $secret = 'Dont_Forget';
         $token = md5(date("Y-m-d H:i:s") . $secret);
 
