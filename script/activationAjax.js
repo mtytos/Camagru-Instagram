@@ -1,6 +1,6 @@
 const form = {
     hash: document.getElementById('hash'),
-    username: document.getElementById('username'),
+    email: document.getElementById('email'),
     submit: document.getElementById('btn-submit'),
     messages: document.getElementById('form-messages')
 };
@@ -22,7 +22,7 @@ form.submit.addEventListener('click', () => {
         }
     };
 
-    const requestData = `hash=${form.hash.value}&username=${form.username.value}`;
+    const requestData = `hash=${form.hash.value}&email=${form.email.value}`;
 
     request.open('post', 'core/activationCore.php');
     request.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');

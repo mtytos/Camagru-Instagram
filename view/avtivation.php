@@ -19,7 +19,7 @@
             <div id="form-messages"></div>
             <input placeholder="Enter your code" type="hash" id="hash" name="hash">
             <br>
-            <input placeholder="Enter your nickname" type="username" id="username" name="username">
+            <input placeholder="Enter your email" type="email" id="email" name="email">
             <br>
             <button type="submit" id="btn-submit" value="reset">Reset password</button>
         </div>

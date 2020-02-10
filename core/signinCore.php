@@ -77,8 +77,20 @@ if ($ok) {
             $messages[] = 'Successful login!';
         }
         else {
+            $secret2 = 'Wars-9';
+            $token = md5(date("Y-m-d H:i:s") . $secret2);
+
+            $st = $db->prepare("SELECT email FROM users WHERE id_user = ?");
+            $st->bindParam(1, $idNameDB);
+            $st->execute();
+            $emailDB = $st->fetchColumn();
+
+            //Не забудь изменить путь до класса Мэйл после вывода из Core
+            require_once 'Mail.php';
+            $action = new Mail;
+            $action->sendMail($emailDB, $token);
             $ok = false;
-            $messages[] = 'Account has not activated';
+            $messages[] = 'Account has not activated. We send you activation instruction to email.';
         }
     } 
     else {

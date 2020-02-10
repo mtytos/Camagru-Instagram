@@ -16,7 +16,7 @@ catch (PDOException $e) {
 }
 
 $hash = isset($_POST['hash']) ? $_POST['hash'] : '';
-$username = isset($_POST['username']) ? $_POST['username'] : '';
+$username = isset($_POST['email']) ? $_POST['email'] : '';
 
 $ok = true;
 $messages = array();
@@ -26,19 +26,19 @@ if ( !isset($hash) || empty($hash) ) {
     $messages[] = 'Code input cannot be empty!';
 }
 
-if ( !isset($username) || empty($username) ) {
+if ( !isset($email) || empty($email) ) {
     $ok = false;
-    $messages[] = 'Username cannot be empty!';
+    $messages[] = 'Email cannot be empty!';
 }
 
-// Ошибка ника
-if (!empty($username) && !preg_match('/^[a-zA-Z][a-zA-Z0-9-_\.]{1,20}$/', $username)) {
+// Ошибка мейла
+if (!empty($email) && !filter_var($email, FILTER_VALIDATE_EMAIL)) {
     $ok = false;
-    $messages[] = 'Incorrect username';
+    $messages[] = 'Incorrect email';
 }
 
-$st = $db->prepare("SELECT id_user FROM users WHERE username = ?");
-$st->bindParam(1, $username);
+$st = $db->prepare("SELECT id_user FROM users WHERE email = ?");
+$st->bindParam(1, $email);
 $st->execute();
 $idNameDB = $st->fetchColumn();
 

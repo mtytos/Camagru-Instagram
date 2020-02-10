@@ -21,9 +21,9 @@ class Mail {
             <p>If you want to finish registration on CAMAGRU and activate account</p>';
         $message2 = '<p>Copy this HASH - ' . $token . '</p>';
 
-        //тут конечно с локалхост надо поменять портдля Мака
+        //ОБЯЗАТЕЛЬНО ИЗМЕНИТЬ ЛОКАЛХОСТ или ДОБАВИТЬ ПОРТЫ ПОД СВОЙ СЕРВЕР
         $message3 = '
-            <p>And click on this link <a href="http://localhost:51555/activation.php">activate account</a>.</p>
+            <p>And click on this link <a href="http://127.0.0.1/Camagru/view/activation.php">activate account</a>.</p>
             <p>If you not registered on site, please, ignoring this message.</p>
             </body>
             </html>';
@@ -61,7 +61,9 @@ class Mail {
                     <body>
                     <p>If you want to reset password on CAMAGRU</p>';
         $message2 = '<p>Copy this HASH - ' . $token . '</p>';
-        $message3 = '<p>And click on this link <a href="http://localhost:51555/resetPass.php">reset password</a>.</p>
+
+        //ОБЯЗАТЕЛЬНО ИЗМЕНИТЬ ЛОКАЛХОСТ или ДОБАВИТЬ ПОРТЫ ПОД СВОЙ СЕРВЕР
+        $message3 = '<p>And click on this link <a href="http://127.0.0.1/Camagru/view/resetPass.php">reset password</a>.</p>
                     <p>If you not reset password, please, ignoring this message.</p>
                     </body>
                     </html>';
