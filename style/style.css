@@ -123,6 +123,12 @@ button:hover {
     background: rgb(253, 32, 154);
 }
 
+button, 
+button:active, 
+button:focus {
+    outline: none;
+}
+
 
 /* АНИМАЦИЯ КОНТЕНТА */
 
