@@ -6,7 +6,7 @@ session_start();
 <html lang="ru">
 <head>
     <meta charset="utf-8">
-    <title>Camagru</title>
+    <title>Reset password</title>
     <link href="../style/style.css" rel="stylesheet">
 </head>
 <body>
