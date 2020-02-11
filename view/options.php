@@ -12,33 +12,49 @@
     </div>
     <div class="content">
         <div class="main">
-            <p>Уведомления о лайках ваших постов</p>
-            <button type="submit" id="btnSubmit" value="like">
-                <?php
-                require_once '../core/OptionClass.php';
-                $act = new Options;
-                if ($act->likeInfo() == 1) {
-                    echo 'Turn off';
-                }
-                else {
-                    echo 'Turn on';
-                } ?>
-            </button>
-            <br/>
-            <p>Уведомления о комментариях ваших постов</p>
-            <button type="submit" id="btnSubmit" value="comment">
-                <?php
-                require_once '../core/OptionClass.php';
-                $act = new Options;
-                if ($act->commentInfo() == 1) {
-                    echo 'Turn off';
-                }
-                else {
-                    echo 'Turn on';
-                } ?>
-            </button>
-            <br/>
-            <button><a class="link-btn" href='#'>Изменить фото профиля</a></button>
+            <form action="../core/optionsCore.php" method="post">
+                <p>Уведомления о лайках ваших постов</p>
+                <button type="submit" name="action" value="like">
+                    <?php
+                    require_once '../core/OptionClass.php';
+                    $act = new Options;
+                    if ($act->likeInfo() == 1) {
+                        echo 'Turn off';
+                    }
+                    else {
+                        echo 'Turn on';
+                    } ?>
+                </button>
+            </form>
+            <form action="../core/optionsCore.php" method="post">
+                <p>Уведомления о комментариях ваших постов</p>
+                <button type="submit" name="action" value="comment">
+                    <?php
+                    require_once '../core/OptionClass.php';
+                    $act = new Options;
+                    if ($act->commentInfo() == 1) {
+                        echo 'Turn off';
+                    }
+                    else {
+                        echo 'Turn on';
+                    } ?>
+                </button>
+            </form>
+            <form action="../core/optionsCore.php" method="post">
+                <p>Уведомления об изменениях данных профиля</p>
+                <button type="submit" name="action" value="profile">
+                    <?php
+                    require_once '../core/OptionClass.php';
+                    $act = new Options;
+                    if ($act->profileInfo() == 1) {
+                        echo 'Turn off';
+                    }
+                    else {
+                        echo 'Turn on';
+                    } ?>
+                </button>
+            </form>
+            <button><a class="link-btn" href='reset.php'>Изменить пароль</a></button>
             <br/>
             <button><a class="link-btn" href='#'>Изменить имя профиля</a></button>
             <br/>
