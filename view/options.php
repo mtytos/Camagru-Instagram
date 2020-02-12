@@ -56,15 +56,15 @@
             </form>
             <button><a class="link-btn" href='reset.php'>Изменить пароль</a></button>
             <br/>
-            <button><a class="link-btn" href='#'>Изменить имя профиля</a></button>
+            <button><a class="link-btn" href='changeName.php'>Изменить имя профиля</a></button>
             <br/>
-            <button><a class="link-btn" href='#'>Изменить почтовый адрес аккаунта</a></button>
+            <button><a class="link-btn" href='changeMail.php'>Изменить почтовый адрес аккаунта</a></button>
         </div>
     </div>
     <div class="footer">
         <p class="gradient">&copy; Copyright<br>created by student School 21 - Mtytos</p>
     </div>
 </div>
-<script src="../script/optionsAjax.js"></script>
+<!-- <script src="../script/optionsAjax.js"></script> -->
 </body>
 </html>
