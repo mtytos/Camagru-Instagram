@@ -28,19 +28,32 @@ $act = new Db();
                                 echo 'Отключены';
                             }
                         ?></b></p>
-                <button type="submit" name="action" value="likeOn">Turn on</button>
-                <button type="submit" name="action" value="likeOff">Turn off</button>
+                <button type="submit" name="action" value="likeInfo">Изменить</button>
             </form>
-<!--            <form action="../core/optionsCore.php" method="post">-->
-<!--                <p>Уведомления о комментариях ваших постов</p>-->
-<!--                <button type="submit" name="action" value="comment">-->
-<!--                </button>-->
-<!--            </form>-->
-<!--            <form action="../core/optionsCore.php" method="post">-->
-<!--                <p>Уведомления об изменениях данных профиля</p>-->
-<!--                <button type="submit" name="action" value="profile">-->
-<!--                </button>-->
-<!--            </form>-->
+            <form action="../core/optionsCore.php" method="post">
+                <p>Уведомления о комментариях ваших постов - <b>
+                        <?php
+                        if ($act->commentInfo($_SESSION['logged']) == 1) {
+                            echo 'Включены';
+                        }
+                        else {
+                            echo 'Отключены';
+                        }
+                        ?></b></p>
+                <button type="submit" name="action" value="commentInfo">Изменить</button>
+            </form>
+            <form action="../core/optionsCore.php" method="post">
+                <p>Уведомления о комментариях ваших постов - <b>
+                        <?php
+                        if ($act->profileInfo($_SESSION['logged']) == 1) {
+                            echo 'Включены';
+                        }
+                        else {
+                            echo 'Отключены';
+                        }
+                        ?></b></p>
+                <button type="submit" name="action" value="profileInfo">Изменить</button>
+            </form>
             <a class="link-btn" href='reset.php'>Изменить пароль</a>
             <br/>
             <a class="link-btn" href='#'>Изменить имя профиля</a>

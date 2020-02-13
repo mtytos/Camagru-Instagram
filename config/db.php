@@ -29,8 +29,24 @@ class Db {
         $st = $this->db->prepare("SELECT like_alert FROM users WHERE username = ?");
         $st->bindParam(1, $username);
         $st->execute();
-        $likeDB = $st->fetchColumn();
-        return $likeDB;
+        $like_alertDB = $st->fetchColumn();
+        return $like_alertDB;
+    }
+
+    public function commentInfo($username) {
+        $st = $this->db->prepare("SELECT comment_alert FROM users WHERE username = ?");
+        $st->bindParam(1, $username);
+        $st->execute();
+        $comment_alertDB = $st->fetchColumn();
+        return $comment_alertDB;
+    }
+
+    public function profileInfo($username) {
+        $st = $this->db->prepare("SELECT profile_alert FROM users WHERE username = ?");
+        $st->bindParam(1, $username);
+        $st->execute();
+        $profile_alert = $st->fetchColumn();
+        return $profile_alert;
     }
 //
 //    public function login($email, $pass) {
