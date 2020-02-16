@@ -32,11 +32,11 @@ if(isset($_POST['upload'])) {
 
     //создаю таблицу лайков поста
     $nameLike = $name . '.like';
-    $sql = "CREATE TABLE IF NOT EXISTS `$nameLike` (id_post INT NOT NULL AUTO_INCREMENT, username VARCHAR(21) NOT NULL, PRIMARY KEY (id_post))";
+    $sql = "CREATE TABLE IF NOT EXISTS `$nameLike` (id_like INT NOT NULL AUTO_INCREMENT, username VARCHAR(21) NOT NULL, PRIMARY KEY (id_like))";
     $db->exec($sql);
     //создаю таблицу комментов поста
     $nameComment = $name . '.Comment';
-    $sql = "CREATE TABLE IF NOT EXISTS `$nameComment` (id_post INT NOT NULL AUTO_INCREMENT, username VARCHAR(21) NOT NULL, comment TEXT, PRIMARY KEY (id_post))";
+    $sql = "CREATE TABLE IF NOT EXISTS `$nameComment` (id_comment INT NOT NULL AUTO_INCREMENT, username VARCHAR(21) NOT NULL, comment TEXT, PRIMARY KEY (id_comment))";
     $db->exec($sql);
 }
 ?>

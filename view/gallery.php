@@ -1,5 +1,7 @@
 <?php
 session_start();
+require_once '../config/db.php';
+$act = new Db();
 ?>
 
 <!DOCTYPE html>
@@ -25,17 +27,26 @@ session_start();
                 if (($files[$i] != ".") && ($files[$i] != "..")) {
                     $path = $dir . $files[$i]; // Получаем путь к картинке
                     // создаю форму для картинки
-                    echo "<form method='post' action='post.php'>";
+                    $postLike = $act->countLike($files[$i]);
+                    $postComment = $act->countComment($files[$i]);
+                    echo "<form method='post' action='../core/galleryCore.php'>";
                     echo $files[$i];
                     echo "<br>";
-                    echo "<img src='$path' alt='$files[$i]' width='300' />"; // Вывод превью картинки
+                    echo "<img src='$path' alt='$files[$i]' width='200' />"; // Вывод превью картинки
                     echo "<br>";
-                    echo "<button type='submit' name='action' value='$files[$i]'>Like</button>";
-                    echo "<button type='submit' name='action' value='$files[$i]'>Comment</button>";
+                    echo "Like = " . $postLike;
+                    echo "<br>";
+                    echo "Comments = " . $postComment;
+                    echo "<br>";
+                    echo "<button type='submit' name='likebtn' value='$files[$i]'>Like</button>";
+                    echo "<button type='submit' name='commentbtn' value='$files[$i]'>Comment</button>";
 
                     // И тут будет еще одна кнопка "УДАЛИТЬ", видима только для владельца этой фотографии
                     //echo "<button type='submit'>Delete</button>";
-
+                    $checkUser = explode('.', $files[$i]);
+                    if ($_SESSION['logged'] == $checkUser[1]) {
+                        echo "<button type='submit' name='deletebtn' value='$files[$i]'>Delete</button>";
+                    }
                     echo "</form>";
                 }
             }

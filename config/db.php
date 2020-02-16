@@ -48,6 +48,33 @@ class Db {
         $profile_alert = $st->fetchColumn();
         return $profile_alert;
     }
+
+    public function btnLike($username, $table) {
+        $tableName = $table . '.like';
+        $st = $this->db->prepare("SELECT id_like FROM `$tableName` WHERE username = ?");
+        $st->bindParam(1, $username);
+        $st->execute();
+        $idLikeDB = $st->fetchColumn();
+        return $idLikeDB;
+    }
+
+    public function countLike($table) {
+        $tableName = $table . '.like';
+        $sql = "SELECT COUNT(*) FROM `$tableName`";
+        $st = $this->db->prepare($sql);
+        $st->execute();
+        $totalLike = $st->fetchColumn();
+        return $totalLike;
+    }
+
+    public function countComment($table) {
+        $tableName = $table . '.comment';
+        $sql = "SELECT COUNT(*) FROM `$tableName`";
+        $st = $this->db->prepare($sql);
+        $st->execute();
+        $totalComment = $st->fetchColumn();
+        return $totalComment;
+    }
 //
 //    public function login($email, $pass) {
 //        try {
