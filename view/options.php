@@ -67,6 +67,5 @@ $act = new Db();
         <p class="gradient">&copy; Copyright<br>created by student School 21 - Mtytos</p>
     </div>
 </div>
-<!--<script src="../script/optionsAjax.js"></script>-->
 </body>
 </html>

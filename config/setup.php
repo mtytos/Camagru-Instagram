@@ -26,7 +26,7 @@ try {
     try {
         $sql = "USE camagru";
         $db->exec($sql);
-        $sql = "CREATE TABLE IF NOT EXISTS users (id_user INT NOT NULL AUTO_INCREMENT, username VARCHAR(30) NOT NULL, email VARCHAR(60) NOT NULL, password TEXT NOT NULL, status INT, token TEXT NOT NULL, like_alert INT, comment_alert INT, profile_alert INT, online INT, PRIMARY KEY (id_user))";
+        $sql = "CREATE TABLE IF NOT EXISTS users (id_user INT NOT NULL AUTO_INCREMENT, username VARCHAR(21) NOT NULL, email VARCHAR(60) NOT NULL, password TEXT NOT NULL, status INT, token TEXT NOT NULL, like_alert INT, comment_alert INT, profile_alert INT, online INT, PRIMARY KEY (id_user))";
         $db->exec($sql);
         echo "Successfully created table - users";
         echo "<br>";
@@ -75,6 +75,17 @@ try {
     }
     catch (PDOException $e) {
         echo "Creating table comments FAILED" . $e->getMessage();
+        echo "<br>";
+    }
+
+    // создаю папку для хранения изображений галереи
+    try {
+        mkdir('../IMG', 0700);
+        echo "Successfully created Dir - IMG";
+        echo "<br>";
+    }
+    catch (PDOException $e) {
+        echo "Creating DIR - FAILED" . $e->getMessage();
         echo "<br>";
     }
 }

@@ -66,7 +66,7 @@ if ($_POST['action'] == 'commentInfo') {
     }
 }
 
-if ($_POST['action'] == 'profileInfo ') {
+if ($_POST['action'] == 'profileInfo') {
 
     $username = $_SESSION['logged'];
 
