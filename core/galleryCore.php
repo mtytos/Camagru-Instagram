@@ -20,52 +20,46 @@ catch (PDOException $e) {
 if ($_POST['likebtn']) {
 
     $username = $_SESSION['logged'];
+    $table = $_POST['likebtn'] . '.like';
 
-    $st = $db->prepare("SELECT like_alert FROM users WHERE username = ?");
+    $st = $db->prepare("SELECT id_like FROM `$table` WHERE username = ?");
     $st->bindParam(1, $username);
     $st->execute();
-    $likeDB = $st->fetchColumn();
+    $idLikeDB = $st->fetchColumn();
 
-    if ($likeDB == 1) {
-        $like = 0;
-        $st = $db->prepare("UPDATE users SET like_alert = :like_alert WHERE username = :username");
-        $st->bindParam(':like_alert', $like);
-        $st->bindParam(':username', $username);
+    if ($idLikeDB) {
+        $st = $db->prepare("DELETE FROM `$table` WHERE id_like = :id_like");
+        $st->bindParam(':id_like', $idLikeDB);
         $st->execute();
     }
     else {
-        $like = 1;
-        $st = $db->prepare("UPDATE users SET like_alert = :like_alert WHERE username = :username");
-        $st->bindParam(':like_alert', $like);
-        $st->bindParam(':username', $username);
+        $st = $db->prepare("INSERT INTO `$table` (username) VALUES(?)");
+        $st->bindParam(1, $username);
         $st->execute();
     }
 }
 
-//if ($_POST['action'] == 'commentInfo') {
-//
-//    $username = $_SESSION['logged'];
-//
-//    $st = $db->prepare("SELECT comment_alert FROM users WHERE username = ?");
-//    $st->bindParam(1, $username);
-//    $st->execute();
-//    $commentDB = $st->fetchColumn();
-//
-//    if ($commentDB == 1) {
-//        $comment = 0;
-//        $st = $db->prepare("UPDATE users SET comment_alert = :comment_alert WHERE username = :username");
-//        $st->bindParam(':comment_alert', $comment);
-//        $st->bindParam(':username', $username);
-//        $st->execute();
-//    }
-//    else {
-//        $comment = 1;
-//        $st = $db->prepare("UPDATE users SET comment_alert = :comment_alert WHERE username = :username");
-//        $st->bindParam(':comment_alert', $comment);
-//        $st->bindParam(':username', $username);
-//        $st->execute();
-//    }
-//}
+if ($_POST['commentbtn']) {
+
+    $username = $_SESSION['logged'];
+    $table = $_POST['commentbtn'] . '.comment';
+
+    $st = $db->prepare("SELECT id_comment FROM `$table` WHERE username = ?");
+    $st->bindParam(1, $username);
+    $st->execute();
+    $idCommentDB = $st->fetchColumn();
+
+    if ($idCommentDB) {
+        $st = $db->prepare("DELETE FROM `$table` WHERE id_comment = :id_comment");
+        $st->bindParam(':id_comment', $idCommentDB);
+        $st->execute();
+    }
+    else {
+        $st = $db->prepare("INSERT INTO `$table` (username) VALUES(?)");
+        $st->bindParam(1, $username);
+        $st->execute();
+    }
+}
 //
 //if ($_POST['action'] == 'profileInfo') {
 //
@@ -92,5 +86,5 @@ if ($_POST['likebtn']) {
 //    }
 //}
 //
-//header('Location: http://localhost/Camagru/view/options.php');
-//exit;
+header('Location: http://localhost/Camagru/view/gallery.php');
+exit;
