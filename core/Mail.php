@@ -83,6 +83,72 @@ class Mail {
     }
 
 
+    public function resetNameMail($email, $token) {
+
+        $to = $email;
+
+        // тема письма
+        $subject = 'Change nickname';
+
+        //собираю из трех кусков свое сообщение
+        $message1 = '
+                    <html>
+                    <head>
+                    <title>Change nickname</title>
+                    </head>
+                    <body>
+                    <p>If you want to change nickname on CAMAGRU</p>';
+        $message2 = '<p>Copy this HASH - ' . $token . '</p>';
+
+        //ОБЯЗАТЕЛЬНО ИЗМЕНИТЬ ЛОКАЛХОСТ или ДОБАВИТЬ ПОРТЫ ПОД СВОЙ СЕРВЕР
+        $message3 = '<p>And click on this link <a href="http://127.0.0.1/Camagru/view/newNameCreate.php">change nickname</a>.</p>
+                    <p>If you not change nickname, please, ignoring this message.</p>
+                    </body>
+                    </html>';
+        $message = $message1 . $message2 . $message3;
+
+        // Для отправки HTML-письма должен быть установлен заголовок Content-type
+        $headers = 'MIME-Version: 1.0' . "\r\n";
+        $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+
+        // Отправляем
+        mail($to, $subject, $message, $headers);
+    }
+
+
+    public function resetEmailMail($email, $token) {
+
+        $to = $email;
+
+        // тема письма
+        $subject = 'Change email';
+
+        //собираю из трех кусков свое сообщение
+        $message1 = '
+                    <html>
+                    <head>
+                    <title>Change Email</title>
+                    </head>
+                    <body>
+                    <p>If you want to change email on CAMAGRU</p>';
+        $message2 = '<p>Copy this HASH - ' . $token . '</p>';
+
+        //ОБЯЗАТЕЛЬНО ИЗМЕНИТЬ ЛОКАЛХОСТ или ДОБАВИТЬ ПОРТЫ ПОД СВОЙ СЕРВЕР
+        $message3 = '<p>And click on this link <a href="http://127.0.0.1/Camagru/view/newEmailCreate.php">change email</a>.</p>
+                    <p>If you not change email, please, ignoring this message.</p>
+                    </body>
+                    </html>';
+        $message = $message1 . $message2 . $message3;
+
+        // Для отправки HTML-письма должен быть установлен заголовок Content-type
+        $headers = 'MIME-Version: 1.0' . "\r\n";
+        $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+
+        // Отправляем
+        mail($to, $subject, $message, $headers);
+    }
+
+
     public function likeMail($email) {
 
         $to = $email;

@@ -56,7 +56,7 @@ $act = new Db();
             </form>
             <a class="link-btn" href='reset.php'>Изменить пароль</a>
             <br/>
-            <a class="link-btn" href='#'>Изменить имя профиля</a>
+            <a class="link-btn" href='newName.php'>Изменить имя профиля</a>
             <br/>
             <a class="link-btn" href='#'>Изменить почтовый адрес аккаунта</a>
             <br/>

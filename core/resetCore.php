@@ -69,6 +69,13 @@ if ($ok) {
         $st->bindParam(':email', $email);
         $st->execute();
 
+        //обновляю статус щнлайн на 0
+        $online = 0;
+        $st = $db->prepare("UPDATE users SET online = :online WHERE email = :email");
+        $st->bindParam(':online', $online);
+        $st->bindParam(':email', $email);
+        $st->execute();
+
         require_once 'Mail.php';
         $action = new Mail;
         $action->sendResetMail($email, $token);

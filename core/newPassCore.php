@@ -46,9 +46,9 @@ if ( !isset($password) || empty($password) ) {
 }
 
 // Ошибка пароля
-if (!empty($password) && !preg_match('/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{6,}/', $password)) {
+if (!empty($password) && !preg_match('/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@!%*#?&])[A-Za-z\d@!%*#?&]{6,}/', $password)) {
     $ok = false;
-    $messages[] = 'Password should contain one uppercase and lowercase word, one figure and special sign - @$!%*#?&';
+    $messages[] = 'Password should contain one uppercase and lowercase word, one figure and special sign - @!%*#?&';
 }
 
 if ( !isset($repassword) || empty($repassword) ) {
@@ -85,6 +85,13 @@ if ($ok) {
         //обновляю пароль
         $st = $db->prepare("UPDATE users SET password = :password WHERE id_user = :id");
         $st->bindParam(':password', $password);
+        $st->bindParam(':id', $idNameDB);
+        $st->execute();
+
+        //обновляю статус онлайн на 0
+        $online = 0;
+        $st = $db->prepare("UPDATE users SET online = :online WHERE id_user = :id");
+        $st->bindParam(':online', $online);
         $st->bindParam(':id', $idNameDB);
         $st->execute();
 
