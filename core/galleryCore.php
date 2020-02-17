@@ -39,6 +39,19 @@ if ($_POST['likebtn']) {
     }
 }
 
+if ($_POST['deletebtn']) {
+
+    $username = $_SESSION['logged'];
+    $tableLike = $_POST['deletebtn'] . '.like';
+    $tableComment = $_POST['deletebtn'] . '.comment';
+
+    $st = $db->prepare("DROP TABLE `$tableLike`");
+    $st->execute();
+    $st = $db->prepare("DROP TABLE `$tableComment`");
+    $st->execute();
+    unlink('../IMG/' . $_POST['deletebtn']);
+}
+
 //
 //if ($_POST['action'] == 'profileInfo') {
 //

@@ -39,4 +39,7 @@ if(isset($_POST['upload'])) {
     $sql = "CREATE TABLE IF NOT EXISTS `$nameComment` (id_comment INT NOT NULL AUTO_INCREMENT, username VARCHAR(21) NOT NULL, comment TEXT, PRIMARY KEY (id_comment))";
     $db->exec($sql);
 }
+
+header('Location: http://localhost/Camagru/view/gallery.php');
+exit;
 ?>

@@ -39,4 +39,7 @@ if(isset($_POST['download'])) {
     $db->exec($sql);
 
 }
+
+header('Location: http://localhost/Camagru/view/gallery.php');
+exit;
 ?>
