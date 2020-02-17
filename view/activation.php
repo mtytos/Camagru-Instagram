@@ -17,6 +17,7 @@
     <div class="content">
         <div class="main">
             <div id="form-messages"></div>
+            <p>Enter the <b>secret code</b> and Email to complite registration.<br>If activation will be sucsess you will redirect to login page.</p><br>
             <input placeholder="Enter your code" type="hash" id="hash" name="hash">
             <br>
             <input placeholder="Enter your email" type="email" id="email" name="email">

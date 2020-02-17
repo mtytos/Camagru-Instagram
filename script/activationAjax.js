@@ -31,7 +31,7 @@ form.submit.addEventListener('click', () => {
 
 function handleResponse (responseObject) {
     if (responseObject.ok) {
-        location.href = '../view/home.php';
+        location.href = '../index.php';
     }
     else {
         while (form.messages.firstChild) {

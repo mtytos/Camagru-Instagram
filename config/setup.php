@@ -36,47 +36,47 @@ try {
         echo "<br>";
     }
 
-    // создаю таблицу постов posts
-    try {
-        $sql = "USE camagru";
-        $db->exec($sql);
-        $sql = "CREATE TABLE IF NOT EXISTS posts (id_post INT NOT NULL AUTO_INCREMENT, username VARCHAR(30) NOT NULL, PRIMARY KEY (id_post))";
-        $db->exec($sql);
-        echo "Successfully created table - posts";
-        echo "<br>";
-    }
-    catch (PDOException $e) {
-        echo "Creating table posts FAILED" . $e->getMessage();
-        echo "<br>";
-    }
-
-    // создаю таблицу лайков likes
-    try {
-        $sql = "USE camagru";
-        $db->exec($sql);
-        $sql = "CREATE TABLE IF NOT EXISTS likes (id_like INT NOT NULL AUTO_INCREMENT, username VARCHAR(30) NOT NULL, PRIMARY KEY (id_like))";
-        $db->exec($sql);
-        echo "Successfully created table - likes";
-        echo "<br>";
-    }
-    catch (PDOException $e) {
-        echo "Creating table likes FAILED" . $e->getMessage();
-        echo "<br>";
-    }
-
-    // создаю таблицу комментариев comments
-    try {
-        $sql = "USE camagru";
-        $db->exec($sql);
-        $sql = "CREATE TABLE IF NOT EXISTS comments (id_comment INT NOT NULL AUTO_INCREMENT, username VARCHAR(30) NOT NULL, PRIMARY KEY (id_comment))";
-        $db->exec($sql);
-        echo "Successfully created table - comments";
-        echo "<br>";
-    }
-    catch (PDOException $e) {
-        echo "Creating table comments FAILED" . $e->getMessage();
-        echo "<br>";
-    }
+//    // создаю таблицу постов posts
+//    try {
+//        $sql = "USE camagru";
+//        $db->exec($sql);
+//        $sql = "CREATE TABLE IF NOT EXISTS posts (id_post INT NOT NULL AUTO_INCREMENT, username VARCHAR(30) NOT NULL, PRIMARY KEY (id_post))";
+//        $db->exec($sql);
+//        echo "Successfully created table - posts";
+//        echo "<br>";
+//    }
+//    catch (PDOException $e) {
+//        echo "Creating table posts FAILED" . $e->getMessage();
+//        echo "<br>";
+//    }
+//
+//    // создаю таблицу лайков likes
+//    try {
+//        $sql = "USE camagru";
+//        $db->exec($sql);
+//        $sql = "CREATE TABLE IF NOT EXISTS likes (id_like INT NOT NULL AUTO_INCREMENT, username VARCHAR(30) NOT NULL, PRIMARY KEY (id_like))";
+//        $db->exec($sql);
+//        echo "Successfully created table - likes";
+//        echo "<br>";
+//    }
+//    catch (PDOException $e) {
+//        echo "Creating table likes FAILED" . $e->getMessage();
+//        echo "<br>";
+//    }
+//
+//    // создаю таблицу комментариев comments
+//    try {
+//        $sql = "USE camagru";
+//        $db->exec($sql);
+//        $sql = "CREATE TABLE IF NOT EXISTS comments (id_comment INT NOT NULL AUTO_INCREMENT, username VARCHAR(30) NOT NULL, PRIMARY KEY (id_comment))";
+//        $db->exec($sql);
+//        echo "Successfully created table - comments";
+//        echo "<br>";
+//    }
+//    catch (PDOException $e) {
+//        echo "Creating table comments FAILED" . $e->getMessage();
+//        echo "<br>";
+//    }
 
     // создаю папку для хранения изображений галереи
     try {

@@ -72,11 +72,17 @@ if ($ok) {
         $st->execute();
 
         $status = 1;
+//        $online = 1;
 
         $st = $db->prepare("UPDATE users SET status = :status WHERE id_user = :id");
         $st->bindParam(':status', $status);
         $st->bindParam(':id', $idNameDB);
         $st->execute();
+
+//        $st = $db->prepare("UPDATE users SET online = :online WHERE id_user = :id");
+//        $st->bindParam(':online', $online);
+//        $st->bindParam(':id', $idNameDB);
+//        $st->execute();
 
         $ok = true;
         $messages[] = 'Successful login!';

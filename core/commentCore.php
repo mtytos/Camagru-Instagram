@@ -19,7 +19,7 @@ if ($_POST['btnCommentSend']) {
 
     $username = $_SESSION['logged'];
     $table = $_POST['btnCommentSend'] . '.comment';
-    $comment = $_POST['commentText'];
+    $comment = htmlspecialchars($_POST['commentText']);
 
     $st = $db->prepare("INSERT INTO `$table` (username, comment) VALUES(?, ?)");
     $st->bindParam(1, $username);

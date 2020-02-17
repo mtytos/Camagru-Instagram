@@ -47,9 +47,9 @@ if ( !isset($password) || empty($password) ) {
 }
 
 // Ошибка пароля
-if (!empty($password) && !preg_match('/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{6,}/', $password)) {
+if (!empty($password) && !preg_match('/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@!%*#?&])[A-Za-z\d@!%*#?&]{6,}/', $password)) {
     $ok = false;
-    $messages[] = 'Password should contain one uppercase and lowercase word, one figure and special sign - @$!%*#?&';
+    $messages[] = 'Password should contain one uppercase and lowercase word, one figure and special sign - @!%*#?&';
 }
 
 if ( !isset($repassword) || empty($repassword) ) {

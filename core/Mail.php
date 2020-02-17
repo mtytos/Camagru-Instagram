@@ -82,4 +82,82 @@ class Mail {
         }
     }
 
+
+    public function likeMail($email) {
+
+        $to = $email;
+
+        // тема письма
+        $subject = 'Your post has been liked!';
+
+        //собираю из трех кусков свое сообщение
+        $message = '
+                    <html>
+                    <head>
+                    <title>Your post has been liked!</title>
+                    </head>
+                    <body>
+                    <p>It is inform mail about new like</p>
+                    <p>If you want get this message, please, turn off notification in options.</p>
+                    </body>
+                    </html>';
+        // Для отправки HTML-письма должен быть установлен заголовок Content-type
+        $headers = 'MIME-Version: 1.0' . "\r\n";
+        $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+
+        // Отправляем
+        mail($to, $subject, $message, $headers);
+    }
+
+    public function commentMail($email) {
+
+        $to = $email;
+
+        // тема письма
+        $subject = 'Your post has new comment!';
+
+        //собираю из трех кусков свое сообщение
+        $message = '
+                    <html>
+                    <head>
+                    <title>Your post has new comment!</title>
+                    </head>
+                    <body>
+                    <p>It is inform mail about new comment</p>
+                    <p>If you want get this message, please, turn off notification in options.</p>
+                    </body>
+                    </html>';
+        // Для отправки HTML-письма должен быть установлен заголовок Content-type
+        $headers = 'MIME-Version: 1.0' . "\r\n";
+        $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+
+        // Отправляем
+        mail($to, $subject, $message, $headers);
+    }
+
+    public function newNameMail($email) {
+
+        $to = $email;
+
+        // тема письма
+        $subject = 'You changed nickname!';
+
+        //собираю из трех кусков свое сообщение
+        $message = '
+                    <html>
+                    <head>
+                    <title>You changed nickname!</title>
+                    </head>
+                    <body>
+                    <p>It is inform mail about change nickname!</p>
+                    <p>If you want get this message, please, turn off notification in options.</p>
+                    </body>
+                    </html>';
+        // Для отправки HTML-письма должен быть установлен заголовок Content-type
+        $headers = 'MIME-Version: 1.0' . "\r\n";
+        $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+
+        // Отправляем
+        mail($to, $subject, $message, $headers);
+    }
 }
