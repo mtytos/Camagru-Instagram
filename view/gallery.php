@@ -39,20 +39,22 @@ $act = new Db();
                     echo "Comments = " . $postComment;
                     echo "<br>";
                     echo "<button type='submit' name='likebtn' value='$files[$i]'>Like</button>";
-                    echo "<button type='submit' name='commentbtn' value='$files[$i]'>Comment</button>";
 
                     // И тут будет еще одна кнопка "УДАЛИТЬ", видима только для владельца этой фотографии
-                    //echo "<button type='submit'>Delete</button>";
                     $checkUser = explode('.', $files[$i]);
                     if ($_SESSION['logged'] == $checkUser[1]) {
                         echo "<button type='submit' name='deletebtn' value='$files[$i]'>Delete</button>";
                     }
+                    echo "</form>";
+                    echo "<form method='post' action='comment.php'>";
+                    echo "<button type='submit' name='commentbtn' value='$files[$i]'>Comment</button>";
                     echo "</form>";
                 }
             }
             ?>
         </div>
     </div>
+
     <div class="footer">
         <p class="gradient">&copy; Copyright<br>created by student School 21 - Mtytos</p>
     </div>

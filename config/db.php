@@ -75,6 +75,26 @@ class Db {
         $totalComment = $st->fetchColumn();
         return $totalComment;
     }
+
+    public function showComments($table, $user) {
+        $tableName = $table . '.comment';
+        $st = $this->db->prepare("SELECT * FROM `$tableName`");
+        $st->execute();
+        $total = $st->fetchALL(PDO::FETCH_ASSOC);
+
+        $checkUser = explode('.', $table);
+        echo "<form method='post' action='../commentCore.php'>";
+        for ($i = 0; $i < count($total); $i++) {
+            echo $total[$i]['username'] . ": " . $total[$i]['comment'];
+            echo "<br>";
+            $idDel = $total[$i]['id_comment'];
+            if ($user == $checkUser[1] || $user == $total[$i]['username']) {
+                echo "<button type='submit' name='deleteComment' value='$idDel'>Delete</button>";
+            }
+            echo "<br>";
+        }
+        echo "</form>";
+    }
 //
 //    public function login($email, $pass) {
 //        try {
