@@ -36,6 +36,26 @@ if ($_POST['likebtn']) {
         $st = $db->prepare("INSERT INTO `$table` (username) VALUES(?)");
         $st->bindParam(1, $username);
         $st->execute();
+
+        $checkUser = explode('.', $table);
+        $userToBD = $checkUser[1];
+
+        $st = $db->prepare("SELECT like_alert FROM users WHERE username = ?");
+        $st->bindParam(1, $userToBD);
+        $st->execute();
+        $likeAlert = $st->fetchColumn();
+
+        if ($likeAlert == 1) {
+
+            $st = $db->prepare("SELECT email FROM users WHERE username = ?");
+            $st->bindParam(1, $userToBD);
+            $st->execute();
+            $emailAlert = $st->fetchColumn();
+
+            require_once 'Mail.php';
+            $action = new Mail;
+            $action->likeMail($emailAlert);
+        }
     }
 }
 

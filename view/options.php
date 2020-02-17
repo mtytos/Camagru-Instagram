@@ -43,7 +43,7 @@ $act = new Db();
                 <button type="submit" name="action" value="commentInfo">Изменить</button>
             </form>
             <form action="../core/optionsCore.php" method="post">
-                <p>Уведомления о комментариях ваших постов - <b>
+                <p>Уведомления об изменении данных профиля - <b>
                         <?php
                         if ($act->profileInfo($_SESSION['logged']) == 1) {
                             echo 'Включены';

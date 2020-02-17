@@ -25,6 +25,27 @@ if ($_POST['btnCommentSend']) {
     $st->bindParam(1, $username);
     $st->bindParam(2, $comment);
     $st->execute();
+
+    $checkUser = explode('.', $table);
+    $userToBD = $checkUser[1];
+
+    $st = $db->prepare("SELECT comment_alert FROM users WHERE username = ?");
+    $st->bindParam(1, $userToBD);
+    $st->execute();
+    $commentAlert = $st->fetchColumn();
+
+    if ($commentAlert == 1) {
+
+        $st = $db->prepare("SELECT email FROM users WHERE username = ?");
+        $st->bindParam(1, $userToBD);
+        $st->execute();
+        $emailAlert = $st->fetchColumn();
+
+        require_once 'Mail.php';
+        $action = new Mail;
+        $action->commentMail($emailAlert);
+    }
+
 }
 
 if ($_POST['deleteComment']) {
