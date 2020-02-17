@@ -58,7 +58,7 @@ $act = new Db();
             <br/>
             <a class="link-btn" href='newName.php'>Изменить имя профиля</a>
             <br/>
-            <a class="link-btn" href='#'>Изменить почтовый адрес аккаунта</a>
+            <a class="link-btn" href='newEmail.php'>Изменить почтовый адрес аккаунта</a>
             <br/>
             <a class="link-btn" href='home.php'>Home</a>
         </div>

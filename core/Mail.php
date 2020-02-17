@@ -50,7 +50,7 @@ class Mail {
         $to = $email;
 
         // тема письма
-        $subject = 'Registration on CAMAGRU';
+        $subject = 'CAMAGRU. Reset password';
 
         //собираю из трех кусков свое сообщение
         $message1 = '
@@ -88,7 +88,7 @@ class Mail {
         $to = $email;
 
         // тема письма
-        $subject = 'Change nickname';
+        $subject = 'CAMAGRU. Change nickname';
 
         //собираю из трех кусков свое сообщение
         $message1 = '
@@ -121,7 +121,7 @@ class Mail {
         $to = $email;
 
         // тема письма
-        $subject = 'Change email';
+        $subject = 'CAMAGRU. Change email';
 
         //собираю из трех кусков свое сообщение
         $message1 = '
@@ -154,7 +154,7 @@ class Mail {
         $to = $email;
 
         // тема письма
-        $subject = 'Your post has been liked!';
+        $subject = 'CAMAGRU. Your post has been liked!';
 
         //собираю из трех кусков свое сообщение
         $message = '
@@ -180,7 +180,7 @@ class Mail {
         $to = $email;
 
         // тема письма
-        $subject = 'Your post has new comment!';
+        $subject = 'CAMAGRU. Your post has new comment!';
 
         //собираю из трех кусков свое сообщение
         $message = '
@@ -206,7 +206,7 @@ class Mail {
         $to = $email;
 
         // тема письма
-        $subject = 'You changed nickname!';
+        $subject = 'CAMAGRU. You changed nickname!';
 
         //собираю из трех кусков свое сообщение
         $message = '
