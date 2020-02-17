@@ -17,7 +17,6 @@ class Db {
             // $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 //            echo 'Everything is OK, connection to DATABASE was granted';
 //            echo "<br>";
-//            echo 'Ну и ебала';
         }
         catch (PDOException $e) {
 //            echo "Connection failed" . $e->getMessage();
@@ -83,13 +82,13 @@ class Db {
         $total = $st->fetchALL(PDO::FETCH_ASSOC);
 
         $checkUser = explode('.', $table);
-        echo "<form method='post' action='../commentCore.php'>";
+        echo "<form method='post' action='../core/commentCore.php'>";
         for ($i = 0; $i < count($total); $i++) {
             echo $total[$i]['username'] . ": " . $total[$i]['comment'];
             echo "<br>";
             $idDel = $total[$i]['id_comment'];
             if ($user == $checkUser[1] || $user == $total[$i]['username']) {
-                echo "<button type='submit' name='deleteComment' value='$idDel'>Delete</button>";
+                echo "<button type='submit' name='deleteComment' value='$idDel.$tableName'>Delete</button>";
             }
             echo "<br>";
         }

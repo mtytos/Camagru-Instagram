@@ -39,27 +39,6 @@ if ($_POST['likebtn']) {
     }
 }
 
-if ($_POST['commentbtn']) {
-
-    $username = $_SESSION['logged'];
-    $table = $_POST['commentbtn'] . '.comment';
-
-    $st = $db->prepare("SELECT id_comment FROM `$table` WHERE username = ?");
-    $st->bindParam(1, $username);
-    $st->execute();
-    $idCommentDB = $st->fetchColumn();
-
-    if ($idCommentDB) {
-        $st = $db->prepare("DELETE FROM `$table` WHERE id_comment = :id_comment");
-        $st->bindParam(':id_comment', $idCommentDB);
-        $st->execute();
-    }
-    else {
-        $st = $db->prepare("INSERT INTO `$table` (username) VALUES(?)");
-        $st->bindParam(1, $username);
-        $st->execute();
-    }
-}
 //
 //if ($_POST['action'] == 'profileInfo') {
 //

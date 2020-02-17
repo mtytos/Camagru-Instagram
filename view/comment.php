@@ -30,6 +30,13 @@ $act = new Db();
             echo "<img src='$path' alt='#' width='400' />"; // Вывод превью картинки
             $act->showComments($picname, $_SESSION['logged']);
             ?>
+            <form method="post" action="../core/commentCore.php">
+                <p><b>Введите ваш комментарий:</b></p>
+                <p><textarea name="commentText"></textarea></p>
+                <?php
+                echo "<button type='submit' name='btnCommentSend' value='$picname'>Send</button>";
+                ?>
+            </form>
         </div>
     </div>
 
