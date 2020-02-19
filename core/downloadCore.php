@@ -8,14 +8,27 @@ $DB_PASSWORD = '';
 try {
     $db = new PDO($DB_DSN, $DB_USER, $DB_PASSWORD);
     $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    echo "<br>";
-    echo "Successfully connected to the database - ajax";
-    echo "<br>";
+} catch (PDOException $e) {
 }
-catch (PDOException $e) {
-    echo "Creating or re-creating the database schema FAILED" . $e->getMessage();
-    echo "<br>";
-}
+
+
+$stick = $_POST['mask'];
+$pic = $_FILES['file']['tmp_name'];
+
+// Загрузка штампа и фото, для которого применяется водяной знак (называется штамп или печать)
+$stamp = imagecreatefrompng($stick);
+$im = imagecreatefromjpeg($pic);
+
+// Установка полей для штампа и получение высоты/ширины штампа
+$marge_right = 10;
+$marge_bottom = 10;
+$sx = imagesx($stamp);
+$sy = imagesy($stamp);
+
+// Копирование изображения штампа на фотографию с помощью смещения края
+// и ширины фотографии для расчета позиционирования штампа.
+imagecopy($im, $stamp, imagesx($im) - $sx - $marge_right, imagesy($im) - $sy - $marge_bottom, 0, 0, imagesx($stamp), imagesy($stamp));
+
 
 $username = $_SESSION['logged'];
 
@@ -24,28 +37,32 @@ $st->bindParam(1, $username);
 $st->execute();
 $usernameDB = $st->fetchColumn();
 
-if(isset($_POST['download'])) {
-    if(empty($_FILES['file']['size']))  die('Вы не выбрали файл');
-    if($_FILES['file']['size'] > (5 * 1024 * 1024)) die('Размер файла не должен превышать 5Мб');
+if (empty($_FILES['file']['size'])) die('Вы не выбрали файл');
+if ($_FILES['file']['size'] > (5 * 1024 * 1024)) die('Размер файла не должен превышать 5Мб');
 
-    $upload_dir = '../IMG/';
-    $name = date('YmdHis');
-    $name .= '.';
-    $name .= $usernameDB;
-    $name .= '.jpg';
-    $mov = move_uploaded_file($_FILES['file']['tmp_name'],"../IMG/".$name);
+$upload_dir = '../IMG/';
+$name = date('YmdHis');
+$name .= '.';
+$name .= $usernameDB;
+$name .= '.jpg';
 
-    //создаю таблицу лайков поста
-    $nameLike = $name . '.like';
-    $sql = "CREATE TABLE IF NOT EXISTS `$nameLike` (id_like INT NOT NULL AUTO_INCREMENT, id_user VARCHAR(21) NOT NULL, PRIMARY KEY (id_like))";
-    $db->exec($sql);
-    //создаю таблицу комментов поста
-    $nameComment = $name . '.Comment';
-    $sql = "CREATE TABLE IF NOT EXISTS `$nameComment` (id_comment INT NOT NULL AUTO_INCREMENT, id_user VARCHAR(21) NOT NULL, comment TEXT, PRIMARY KEY (id_comment))";
-    $db->exec($sql);
 
-}
+//создаю таблицу лайков поста
+$nameLike = $name . '.like';
+$sql = "CREATE TABLE IF NOT EXISTS `$nameLike` (id_like INT NOT NULL AUTO_INCREMENT, id_user VARCHAR(21) NOT NULL, PRIMARY KEY (id_like))";
+$db->exec($sql);
+//создаю таблицу комментов поста
+$nameComment = $name . '.Comment';
+$sql = "CREATE TABLE IF NOT EXISTS `$nameComment` (id_comment INT NOT NULL AUTO_INCREMENT, id_user VARCHAR(21) NOT NULL, comment TEXT, PRIMARY KEY (id_comment))";
+$db->exec($sql);
+
+
+$npath = $upload_dir . $name;
+imagejpeg($im, $npath);
+imagedestroy($im);
+
 
 header('Location: http://localhost/Camagru/view/gallery.php');
 exit;
+
 ?>

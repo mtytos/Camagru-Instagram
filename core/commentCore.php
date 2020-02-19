@@ -26,29 +26,31 @@ if ($_POST['btnCommentSend']) {
     $table = $_POST['btnCommentSend'] . '.comment';
     $comment = htmlspecialchars($_POST['commentText']);
 
-    $st = $db->prepare("INSERT INTO `$table` (id_user, comment) VALUES(?, ?)");
-    $st->bindParam(1, $usernameDB);
-    $st->bindParam(2, $comment);
-    $st->execute();
+    if ($comment != "") {
+        $st = $db->prepare("INSERT INTO `$table` (id_user, comment) VALUES(?, ?)");
+        $st->bindParam(1, $usernameDB);
+        $st->bindParam(2, $comment);
+        $st->execute();
 
-    $checkUser = explode('.', $table);
-    $userToBD = $checkUser[1];
+        $checkUser = explode('.', $table);
+        $userToBD = $checkUser[1];
 
-    $st = $db->prepare("SELECT comment_alert FROM users WHERE id_user = ?");
-    $st->bindParam(1, $userToBD);
-    $st->execute();
-    $commentAlert = $st->fetchColumn();
-
-    if ($commentAlert == 1) {
-
-        $st = $db->prepare("SELECT email FROM users WHERE id_user = ?");
+        $st = $db->prepare("SELECT comment_alert FROM users WHERE id_user = ?");
         $st->bindParam(1, $userToBD);
         $st->execute();
-        $emailAlert = $st->fetchColumn();
+        $commentAlert = $st->fetchColumn();
 
-        require_once 'Mail.php';
-        $action = new Mail;
-        $action->commentMail($emailAlert);
+        if ($commentAlert == 1) {
+
+            $st = $db->prepare("SELECT email FROM users WHERE id_user = ?");
+            $st->bindParam(1, $userToBD);
+            $st->execute();
+            $emailAlert = $st->fetchColumn();
+
+            require_once 'Mail.php';
+            $action = new Mail;
+            $action->commentMail($emailAlert);
+        }
     }
 
 }
