@@ -163,7 +163,7 @@
                 // document.getElementById("try").appendChild(link);
                 ev.preventDefault();
             } else {
-                alert("fuck u");
+                alert("You should take a sticker :)");
             }
         }, false);
 

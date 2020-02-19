@@ -100,34 +100,34 @@ p {
     margin-top: 10px;
 }
 
-.link-btn {
-    color: whitesmoke;
-}
+/*.link-btn {*/
+/*    color: whitesmoke;*/
+/*}*/
 
-button {
-    background: rgb(112, 0, 216);
-    border: none;
-    border-radius: 8px;
-    color: #fff;
-    cursor: pointer;
-    font-family: Arial, sans-serif;
-    font-size: 16px;
-    height: 40px;
-    width: 250px;
-    margin-top: 20px;
-    margin-bottom: 10px;
-    transition: all .3s cubic-bezier(.6,0,.4,1);
-}
+/*button {*/
+/*    background: rgb(112, 0, 216);*/
+/*    border: none;*/
+/*    border-radius: 8px;*/
+/*    color: #fff;*/
+/*    cursor: pointer;*/
+/*    font-family: Arial, sans-serif;*/
+/*    font-size: 16px;*/
+/*    height: 40px;*/
+/*    width: 250px;*/
+/*    margin-top: 20px;*/
+/*    margin-bottom: 10px;*/
+/*    transition: all .3s cubic-bezier(.6,0,.4,1);*/
+/*}*/
 
-button:hover {
-    background: rgb(253, 32, 154);
-}
+/*button:hover {*/
+/*    background: rgb(253, 32, 154);*/
+/*}*/
 
-button,
-button:active,
-button:focus {
-    outline: none;
-}
+/*button,*/
+/*button:active,*/
+/*button:focus {*/
+/*    outline: none;*/
+/*}*/
 
 
 /* АНИМАЦИЯ КОНТЕНТА */

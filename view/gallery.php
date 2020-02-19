@@ -72,15 +72,11 @@ $act = new Db();
                             $c = substr($c, 0, 10);
 
                             echo "<form method='post' action='../core/galleryCore.php'>";
-                            echo $files[$i];
+                            echo "<img src='$path' alt='$files[$i]' width='600' />"; // Вывод превью картинки
                             echo "<br>";
-                            echo "<img src='$path' alt='$files[$i]' width='200' />"; // Вывод превью картинки
-                            echo "<br>";
+                            echo "Like = " . $postLike . "  |  ";
+                            echo "Comments = " . $postComment . "  |  ";
                             echo "Posted - " . $c;
-                            echo "<br>";
-                            echo "Like = " . $postLike;
-                            echo "<br>";
-                            echo "Comments = " . $postComment;
                             echo "<br>";
                             $btnName = "Like";
                             if ($act->btnLike($usernameDB, $files[$i])) {
@@ -96,9 +92,9 @@ $act = new Db();
                                 echo "<button type='submit' name='deletebtn' value='$files[$i]'>Delete</button>";
                             }
                             echo "</form>";
-                            echo "<form method='post' action='comment.php'>";
+                            echo "<form method='post' action='comment.php' style='display: inline-block'>";
                             echo "<button type='submit' name='commentbtn' value='$files[$i]'>Comment</button>";
-                            echo "</form>";
+                            echo "</form><br><hr><br>";
                         }
                     }
                 }
@@ -120,14 +116,10 @@ $act = new Db();
                             $c = substr($c, 0, 10);
 
                             echo "<form>";
-                            echo $files[$i];
+                            echo "<img src='$path' alt='$files[$i]' width='600' />"; // Вывод превью картинки
                             echo "<br>";
-                            echo "<img src='$path' alt='$files[$i]' width='200' />"; // Вывод превью картинки
-                            echo "<br>";
-                            echo "Posted - " . $c;
-                            echo "<br>";
-                            echo "Like = " . $postLike;
-                            echo "<br>";
+                            echo "Posted - " . $c . "   ";
+                            echo "Like = " . $postLike . "   ";
                             echo "Comments = " . $postComment;
                             echo "<br>";
                             $btnName = "Like";
@@ -158,14 +150,10 @@ $act = new Db();
                         $c = substr($c, 0, 10);
 
                         echo "<form>";
-                        echo $files[$i];
+                        echo "<img src='$path' alt='$files[$i]' width='600' />"; // Вывод превью картинки
                         echo "<br>";
-                        echo "<img src='$path' alt='$files[$i]' width='200' />"; // Вывод превью картинки
-                        echo "<br>";
-                        echo "Posted - " . $c;
-                        echo "<br>";
-                        echo "Like = " . $postLike;
-                        echo "<br>";
+                        echo "Posted - " . $c . "   ";
+                        echo "Like = " . $postLike . "   ";
                         echo "Comments = " . $postComment;
                         echo "<br>";
                         $btnName = "Like";

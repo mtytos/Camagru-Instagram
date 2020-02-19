@@ -11,6 +11,8 @@ try {
 } catch (PDOException $e) {
 }
 
+if (empty($_FILES['file']['size'])) die('Вы не выбрали файл');
+if ($_FILES['file']['size'] > (5 * 1024 * 1024)) die('Размер файла не должен превышать 5Мб');
 
 $stick = $_POST['mask'];
 $pic = $_FILES['file']['tmp_name'];
@@ -37,8 +39,6 @@ $st->bindParam(1, $username);
 $st->execute();
 $usernameDB = $st->fetchColumn();
 
-if (empty($_FILES['file']['size'])) die('Вы не выбрали файл');
-if ($_FILES['file']['size'] > (5 * 1024 * 1024)) die('Размер файла не должен превышать 5Мб');
 
 $upload_dir = '../IMG/';
 $name = date('YmdHis');

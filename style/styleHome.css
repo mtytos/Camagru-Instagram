@@ -117,19 +117,19 @@ body {
     text-align: center;
 }
 
-.tempGallery {
-    color: whitesmoke;
-    /* background: rgb(32, 38, 41); */
-    /* включаю для отладки */
-    background: rgba(236, 149, 255, 0.74);
-    grid-gap: 2px;
-}
+/*.tempGallery {*/
+/*    color: whitesmoke;*/
+/*    !* background: rgb(32, 38, 41); *!*/
+/*    !* включаю для отладки *!*/
+/*    background: rgba(236, 149, 255, 0.74);*/
+/*    grid-gap: 2px;*/
+/*}*/
 
-.downloadPic {
-    background: rgb(32, 38, 41);
-    /*background: whitesmoke;*/
-    color: whitesmoke;
-}
+/*.downloadPic {*/
+/*    background: rgb(32, 38, 41);*/
+/*    !*background: whitesmoke;*!*/
+/*    color: whitesmoke;*/
+/*}*/
 
 #tempPic {
     grid-area: t;
@@ -147,21 +147,6 @@ body {
     min-height: 270px;
 }
 
-input {
-    background: #fff;
-    border: none;
-    outline: none;
-    border-radius: 8px;
-    font-size: 16px;
-    font-family: Arial, sans-serif;
-    height: 40px;
-    width: 250px;
-    margin-bottom: 10px;
-    opacity: 1;
-    text-indent: 20px;
-    transition: all .2s ease-in-out;
-}
-
 a {
     text-decoration: none;
 }
@@ -170,51 +155,6 @@ p {
     margin: 0;
     padding: 0;
     margin-top: 10px;
-}
-
-button {
-    background: rgb(112, 0, 216);
-    border: none;
-    border-radius: 8px;
-    color: #fff;
-    cursor: pointer;
-    font-family: Arial, sans-serif;
-    font-size: 16px;
-    height: 40px;
-    width: 250px;
-    margin-top: 20px;
-    margin-bottom: 10px;
-    transition: all .3s cubic-bezier(.6,0,.4,1);
-}
-
-button:hover {
-    background: rgb(253, 32, 154);
-}
-
-button, 
-button:active, 
-button:focus {
-    outline: none;
-}
-
-.thumb img  {
-    border: 2px solid #55c5e9; /* Рамка вокруг фотографии */
-    padding: 15px; /* Расстояние от картинки до рамки */
-    background: rgb(238, 77, 77); /* Цвет фона */
-    margin-right: 10px; /* Отступ справа */
-    margin-bottom: 10px; /* Отступ снизу */
-}
-
-#options, #logout, #gallery {
-    text-align: center;
-    font-size: 14px;
-    width: 100px;
-    background: rgb(32, 38, 41);
-    padding-bottom: 25px;
-}
-
-#options:hover, #logout:hover, #gallery:hover {
-    background: rgb(32, 38, 41);
 }
 
 .nav {

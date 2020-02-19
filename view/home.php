@@ -87,7 +87,7 @@ if (isset($_SESSION['logged'])) {
                     <label><input type="radio" name="mask" value="https://raw.githubusercontent.com/mtytos/Hackaton-PhotoLab-TikTok/master/lips.png" onclick="EnableSubmit()">
                         <img src="https://raw.githubusercontent.com/mtytos/Hackaton-PhotoLab-TikTok/master/lips.png" width="100"></label>
                     <br><br>
-                    <input type="file" name="file" />
+                    <input type="file" name="file" accept="image/jpeg">
                     <input type="submit" id="button1" name="download" value="download" disabled="disabled">
                 </form>
             </div>
