@@ -33,6 +33,11 @@ if (isset($_SESSION['logged'])) {
     <link href="../style/styleHome.css" rel="stylesheet">
     <script>
         var username = '<?php echo $_SESSION['logged']; ?>';
+
+        function EnableSubmit() {
+            var btn = document.getElementById("button1");
+            btn.disabled = false;
+        }
     </script>
     <script src="../script/scriptWebCam.js"></script>
 </head>
@@ -60,12 +65,6 @@ if (isset($_SESSION['logged'])) {
     </div>
     <div class="menu">
         <div class="tempGallery">
-            <div class="downloadPic">
-                <form method="post" enctype="multipart/form-data" action="../core/downloadCore.php">
-                    <input type="file" name="file" />
-                    <input type="submit" name="download" value="download" />
-                </form>
-            </div>
             <div id="tempPic" class="thumb"></div>
         </div>
     </div>
@@ -76,8 +75,21 @@ if (isset($_SESSION['logged'])) {
                 <button id="startbutton">Take photo</button>
             </div>
             <canvas id="canvas"></canvas>
-            <div class="output">
+            <div class="output" style="display: none">
                 <img id="photo" alt="The screen capture will appear in this box.">
+            </div>
+            <div class="downloadPic">
+                <form method="post" enctype="multipart/form-data" action="../core/downloadCore.php">
+                    <label><input type="radio" name="mask" value="https://raw.githubusercontent.com/mtytos/Hackaton-PhotoLab-TikTok/master/one.png" onclick="EnableSubmit()">
+                        <img src="https://raw.githubusercontent.com/mtytos/Hackaton-PhotoLab-TikTok/master/one.png"> </label>
+                    <label><input type="radio" name="mask" value="https://raw.githubusercontent.com/mtytos/Hackaton-PhotoLab-TikTok/master/moustache.png" onclick="EnableSubmit()">
+                        <img src="https://raw.githubusercontent.com/mtytos/Hackaton-PhotoLab-TikTok/master/moustache.png" width="200"></label>
+                    <label><input type="radio" name="mask" value="https://raw.githubusercontent.com/mtytos/Hackaton-PhotoLab-TikTok/master/lips.png" onclick="EnableSubmit()">
+                        <img src="https://raw.githubusercontent.com/mtytos/Hackaton-PhotoLab-TikTok/master/lips.png" width="100"></label>
+                    <br><br>
+                    <input type="file" name="file" />
+                    <input type="submit" id="button1" name="download" value="download" disabled="disabled">
+                </form>
             </div>
         </div>
     </div>

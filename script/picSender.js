@@ -1,9 +1,7 @@
-var piclink = "https://raw.githubusercontent.com/mtytos/Hackaton-PhotoLab-TikTok/master/spiderman.jpg";
+// var piclink = "https://raw.githubusercontent.com/mtytos/Hackaton-PhotoLab-TikTok/master/spiderman.jpg";
 
 const form = {
-    // pic: piclink,
-    // username: document.getElementById('username'),
-    pic: piclink,
+    pic: document.getElementById('pic'),
     submit: document.getElementById('btn-submit'),
     messages: document.getElementById('form-messages')
 };
@@ -25,9 +23,9 @@ form.submit.addEventListener('click', () => {
         }
     };
 
-    const requestData = `pic=${form.pic}`;
+    const requestData = `pic=${form.pic.value}`;
 
-    request.open('post', '../core/picDeliver.php');
+    request.open('post', '../tmp/picDownl.php');
     request.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
     request.send(requestData);
 });
@@ -42,12 +40,12 @@ function handleResponse (responseObject) {
             p.textContent = message;
             form.messages.appendChild(p);
         });
-        var img = document.createElement('img');
-        var src = responseObject.link;
-        var value = "username";
-        img.setAttribute("src", src);
-        img.setAttribute("value", value);
-        document.getElementById("lol").appendChild(img);
+        // var img = document.createElement('img');
+        // var src = responseObject.link;
+        // var value = "username";
+        // img.setAttribute("src", src);
+        // img.setAttribute("value", value);
+        // document.getElementById("lol").appendChild(img);
     }
     else {
         while (form.messages.firstChild) {

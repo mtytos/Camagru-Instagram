@@ -13,8 +13,7 @@
     <div class="content">
         <div class="main">
             <div id="form-messages"></div>
-            <input placeholder="Nickname" type="text" id="username" name="username">
-            <br>
+            <input id="pic" type="file" name="file" />
             <button type="submit" id="btn-submit" value="pic">pic</button>
             <div id="lol"></div>
         </div>

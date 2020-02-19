@@ -13,7 +13,7 @@ body {
     grid-template-rows: 60px 1fr 60px;
     grid-template-areas:
             "l l u u i i g g o o e e"
-            "c c c c c c c m m m m m"
+            "c c c c c c c c m m m m"
             "f f f f f f f f f f f f";
     /*text-align: center;*/
     /*min-width: 1600px;*/
@@ -118,13 +118,6 @@ body {
 }
 
 .tempGallery {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: 100px 1fr;
-    grid-template-areas:
-            "d d"
-            "t t";
-    min-height: 100vh;
     color: whitesmoke;
     /* background: rgb(32, 38, 41); */
     /* включаю для отладки */
@@ -133,7 +126,6 @@ body {
 }
 
 .downloadPic {
-    grid-area: d;
     background: rgb(32, 38, 41);
     /*background: whitesmoke;*/
     color: whitesmoke;

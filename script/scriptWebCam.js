@@ -42,112 +42,129 @@
         }, false);
 
         startbutton.addEventListener('click', function (ev) {
-            takepicture();
 
-            // var piclink = "https://raw.githubusercontent.com/mtytos/Hackaton-PhotoLab-TikTok/master/one.png";
-            var piclink = encodeURIComponent(canvas.toDataURL("image/png"));
-            //var piclink = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAACWCAYAAABkW7XSAAAEaUlEQVR4Xu3UAQkAMAwDwdW/k5rcYC4ergrCpWR29x5HgACBgMAYrEBLIhIg8AUMlkcgQCAjYLAyVQlKgIDB8gMECGQEDFamKkEJEDBYfoAAgYyAwcpUJSgBAgbLDxAgkBEwWJmqBCVAwGD5AQIEMgIGK1OVoAQIGCw/QIBARsBgZaoSlAABg+UHCBDICBisTFWCEiBgsPwAAQIZAYOVqUpQAgQMlh8gQCAjYLAyVQlKgIDB8gMECGQEDFamKkEJEDBYfoAAgYyAwcpUJSgBAgbLDxAgkBEwWJmqBCVAwGD5AQIEMgIGK1OVoAQIGCw/QIBARsBgZaoSlAABg+UHCBDICBisTFWCEiBgsPwAAQIZAYOVqUpQAgQMlh8gQCAjYLAyVQlKgIDB8gMECGQEDFamKkEJEDBYfoAAgYyAwcpUJSgBAgbLDxAgkBEwWJmqBCVAwGD5AQIEMgIGK1OVoAQIGCw/QIBARsBgZaoSlAABg+UHCBDICBisTFWCEiBgsPwAAQIZAYOVqUpQAgQMlh8gQCAjYLAyVQlKgIDB8gMECGQEDFamKkEJEDBYfoAAgYyAwcpUJSgBAgbLDxAgkBEwWJmqBCVAwGD5AQIEMgIGK1OVoAQIGCw/QIBARsBgZaoSlAABg+UHCBDICBisTFWCEiBgsPwAAQIZAYOVqUpQAgQMlh8gQCAjYLAyVQlKgIDB8gMECGQEDFamKkEJEDBYfoAAgYyAwcpUJSgBAgbLDxAgkBEwWJmqBCVAwGD5AQIEMgIGK1OVoAQIGCw/QIBARsBgZaoSlAABg+UHCBDICBisTFWCEiBgsPwAAQIZAYOVqUpQAgQMlh8gQCAjYLAyVQlKgIDB8gMECGQEDFamKkEJEDBYfoAAgYyAwcpUJSgBAgbLDxAgkBEwWJmqBCVAwGD5AQIEMgIGK1OVoAQIGCw/QIBARsBgZaoSlAABg+UHCBDICBisTFWCEiBgsPwAAQIZAYOVqUpQAgQMlh8gQCAjYLAyVQlKgIDB8gMECGQEDFamKkEJEDBYfoAAgYyAwcpUJSgBAgbLDxAgkBEwWJmqBCVAwGD5AQIEMgIGK1OVoAQIGCw/QIBARsBgZaoSlAABg+UHCBDICBisTFWCEiBgsPwAAQIZAYOVqUpQAgQMlh8gQCAjYLAyVQlKgIDB8gMECGQEDFamKkEJEDBYfoAAgYyAwcpUJSgBAgbLDxAgkBEwWJmqBCVAwGD5AQIEMgIGK1OVoAQIGCw/QIBARsBgZaoSlAABg+UHCBDICBisTFWCEiBgsPwAAQIZAYOVqUpQAgQMlh8gQCAjYLAyVQlKgIDB8gMECGQEDFamKkEJEDBYfoAAgYyAwcpUJSgBAgbLDxAgkBEwWJmqBCVAwGD5AQIEMgIGK1OVoAQIGCw/QIBARsBgZaoSlAABg+UHCBDICBisTFWCEiBgsPwAAQIZAYOVqUpQAgQMlh8gQCAjYLAyVQlKgIDB8gMECGQEDFamKkEJEHjr+8DkBQk1VgAAAABJRU5ErkJggg==";
-            var form = {
-                // pic: piclink,
-                // username: document.getElementById('username'),
-                pic: piclink,
-                submit: document.getElementById('btn-submit'),
-                messages: document.getElementById('form-messages')
-            };
-
-            var request = new XMLHttpRequest();
-
-            request.onload = () => {
-                let responseObject = null;
-
-                try {
-                    responseObject = JSON.parse(request.responseText);
-                } catch (e) {
-                    console.error('Could not parse JSON!');
-                }
-
-                if (responseObject) {
-                    handleResponse(responseObject);
-                }
-            };
-
-            var requestData = `pic=${form.pic}`;
-
-            request.open('post', '../tmp/picDeliver.php');
-            request.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-            request.send(requestData);
-
-            function handleResponse(responseObject) {
-                if (responseObject.ok) {
-
-                    var picForm = document.createElement('form');
-                    picForm.setAttribute('method', 'post');
-                    picForm.setAttribute('enctype', 'multipart/form-data');
-                    picForm.setAttribute('action', '../core/uploadClass.php');
-                    picForm.setAttribute('class', 'picForm');
-                    document.getElementById("tempPic").appendChild(picForm);
-
-                    var img = document.createElement('img');
-                    var link = responseObject.link;
-                    var value = username;
-                    img.setAttribute("src", link);
-                    img.setAttribute("value", value);
-                    document.querySelector('.picForm:last-child').appendChild(img);
-
-                    var btnUpload = document.createElement('button');
-                    btnUpload.setAttribute('type', 'submit');
-                    btnUpload.setAttribute('name', 'upload');
-                    btnUpload.setAttribute('value', link);
-                    btnUpload.appendChild(document.createTextNode("Зпостить"));
-                    document.querySelector('.picForm:last-child').appendChild(btnUpload);
-                } else {
-                    var img = document.createElement('img');
-                    var link = "https://raw.githubusercontent.com/mtytos/Hackaton-PhotoLab-TikTok/master/spiderman.jpg";
-                    var value = username;
-                    img.setAttribute("src", link);
-                    img.setAttribute("value", value);
-                    document.getElementById("tempPic").appendChild(img);
+            var needCheck = document.getElementsByName('mask');
+            var a = "1";
+            for (var i = 0; i < needCheck.length; i++) {
+                if (needCheck[i].checked) {
+                    a = needCheck[i].value;
                 }
             }
 
-            //
-            // var picForm = document.createElement('form');
-            // picForm.setAttribute('method', 'post');
-            // picForm.setAttribute('enctype', 'multipart/form-data');
-            // picForm.setAttribute('action', '../core/uploadClass.php');
-            // picForm.setAttribute('class', 'picForm');
-            // document.getElementById("tempPic").appendChild(picForm);
-            //
-            // var img = document.createElement('img');
-            // var link = canvas.toDataURL();
-            // var value = username;
-            // img.setAttribute("src", link);
-            // img.setAttribute("value", value);
-            // document.querySelector('.picForm:last-child').appendChild(img);
-            //
-            // var btnUpload = document.createElement('button');
-            // btnUpload.setAttribute('type', 'submit');
-            // btnUpload.setAttribute('name', 'upload');
-            // btnUpload.setAttribute('value', link);
-            // btnUpload.appendChild(document.createTextNode("Зпостить"));
-            // document.querySelector('.picForm:last-child').appendChild(btnUpload);
-            //
-            // var btnDownload = document.createElement('button');
-            // btnDownload.setAttribute('type', 'submit');
-            // btnDownload.setAttribute('name', 'download');
-            // btnDownload.setAttribute('value', 'link');
-            // btnDownload.appendChild(document.createTextNode("Загрузить"));
-            // document.querySelector('.picForm:last-child').appendChild(btnDownload);
-            //
-            //
-            // var link = document.createElement('a');
-            // link.innerHTML = 'download image';
-            // link.addEventListener('click', function(ev) {
-            //     link.href = canvas.toDataURL();
-            //     link.download = "mypainting.png";
-            // }, false);
-            // document.getElementById("try").appendChild(link);
-            ev.preventDefault();
+            if (a != "1") {
+
+                takepicture();
+
+                // var piclink = "https://raw.githubusercontent.com/mtytos/Hackaton-PhotoLab-TikTok/master/one.png";
+                var piclink = encodeURIComponent(canvas.toDataURL("image/png"));
+                //var piclink = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAACWCAYAAABkW7XSAAAEaUlEQVR4Xu3UAQkAMAwDwdW/k5rcYC4ergrCpWR29x5HgACBgMAYrEBLIhIg8AUMlkcgQCAjYLAyVQlKgIDB8gMECGQEDFamKkEJEDBYfoAAgYyAwcpUJSgBAgbLDxAgkBEwWJmqBCVAwGD5AQIEMgIGK1OVoAQIGCw/QIBARsBgZaoSlAABg+UHCBDICBisTFWCEiBgsPwAAQIZAYOVqUpQAgQMlh8gQCAjYLAyVQlKgIDB8gMECGQEDFamKkEJEDBYfoAAgYyAwcpUJSgBAgbLDxAgkBEwWJmqBCVAwGD5AQIEMgIGK1OVoAQIGCw/QIBARsBgZaoSlAABg+UHCBDICBisTFWCEiBgsPwAAQIZAYOVqUpQAgQMlh8gQCAjYLAyVQlKgIDB8gMECGQEDFamKkEJEDBYfoAAgYyAwcpUJSgBAgbLDxAgkBEwWJmqBCVAwGD5AQIEMgIGK1OVoAQIGCw/QIBARsBgZaoSlAABg+UHCBDICBisTFWCEiBgsPwAAQIZAYOVqUpQAgQMlh8gQCAjYLAyVQlKgIDB8gMECGQEDFamKkEJEDBYfoAAgYyAwcpUJSgBAgbLDxAgkBEwWJmqBCVAwGD5AQIEMgIGK1OVoAQIGCw/QIBARsBgZaoSlAABg+UHCBDICBisTFWCEiBgsPwAAQIZAYOVqUpQAgQMlh8gQCAjYLAyVQlKgIDB8gMECGQEDFamKkEJEDBYfoAAgYyAwcpUJSgBAgbLDxAgkBEwWJmqBCVAwGD5AQIEMgIGK1OVoAQIGCw/QIBARsBgZaoSlAABg+UHCBDICBisTFWCEiBgsPwAAQIZAYOVqUpQAgQMlh8gQCAjYLAyVQlKgIDB8gMECGQEDFamKkEJEDBYfoAAgYyAwcpUJSgBAgbLDxAgkBEwWJmqBCVAwGD5AQIEMgIGK1OVoAQIGCw/QIBARsBgZaoSlAABg+UHCBDICBisTFWCEiBgsPwAAQIZAYOVqUpQAgQMlh8gQCAjYLAyVQlKgIDB8gMECGQEDFamKkEJEDBYfoAAgYyAwcpUJSgBAgbLDxAgkBEwWJmqBCVAwGD5AQIEMgIGK1OVoAQIGCw/QIBARsBgZaoSlAABg+UHCBDICBisTFWCEiBgsPwAAQIZAYOVqUpQAgQMlh8gQCAjYLAyVQlKgIDB8gMECGQEDFamKkEJEDBYfoAAgYyAwcpUJSgBAgbLDxAgkBEwWJmqBCVAwGD5AQIEMgIGK1OVoAQIGCw/QIBARsBgZaoSlAABg+UHCBDICBisTFWCEiBgsPwAAQIZAYOVqUpQAgQMlh8gQCAjYLAyVQlKgIDB8gMECGQEDFamKkEJEDBYfoAAgYyAwcpUJSgBAgbLDxAgkBEwWJmqBCVAwGD5AQIEMgIGK1OVoAQIGCw/QIBARsBgZaoSlAABg+UHCBDICBisTFWCEiBgsPwAAQIZAYOVqUpQAgQMlh8gQCAjYLAyVQlKgIDB8gMECGQEDFamKkEJEHjr+8DkBQk1VgAAAABJRU5ErkJggg==";
+                var form = {
+                    // pic: piclink,
+                    // username: document.getElementById('username'),
+                    pic: piclink,
+                    stick: a,
+                    submit: document.getElementById('btn-submit'),
+                    messages: document.getElementById('form-messages')
+                };
+
+                var request = new XMLHttpRequest();
+
+                request.onload = () => {
+                    let responseObject = null;
+
+                    try {
+                        responseObject = JSON.parse(request.responseText);
+                    } catch (e) {
+                        console.error('Could not parse JSON!');
+                    }
+
+                    if (responseObject) {
+                        handleResponse(responseObject);
+                    }
+                };
+
+                var requestData = `pic=${form.pic}&stick=${form.stick}`;
+
+                request.open('post', '../tmp/picDeliver.php');
+                request.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+                request.send(requestData);
+
+                function handleResponse(responseObject) {
+                    if (responseObject.ok) {
+
+                        var picForm = document.createElement('form');
+                        picForm.setAttribute('method', 'post');
+                        picForm.setAttribute('enctype', 'multipart/form-data');
+                        picForm.setAttribute('action', '../core/uploadClass.php');
+                        picForm.setAttribute('class', 'picForm');
+                        document.getElementById("tempPic").appendChild(picForm);
+
+                        var img = document.createElement('img');
+                        var link = responseObject.link;
+                        var value = username;
+                        img.setAttribute("src", link);
+                        img.setAttribute("value", value);
+                        document.querySelector('.picForm:last-child').appendChild(img);
+
+                        var btnUpload = document.createElement('button');
+                        btnUpload.setAttribute('type', 'submit');
+                        btnUpload.setAttribute('name', 'upload');
+                        btnUpload.setAttribute('value', link);
+                        btnUpload.appendChild(document.createTextNode("Add to Gallery"));
+                        document.querySelector('.picForm:last-child').appendChild(btnUpload);
+
+                    } else {
+
+                        var img = document.createElement('img');
+                        var link = "https://raw.githubusercontent.com/mtytos/Hackaton-PhotoLab-TikTok/master/spiderman.jpg";
+                        var value = username;
+                        img.setAttribute("src", link);
+                        img.setAttribute("value", value);
+                        document.getElementById("tempPic").appendChild(img);
+                    }
+                }
+
+                //
+                // var picForm = document.createElement('form');
+                // picForm.setAttribute('method', 'post');
+                // picForm.setAttribute('enctype', 'multipart/form-data');
+                // picForm.setAttribute('action', '../core/uploadClass.php');
+                // picForm.setAttribute('class', 'picForm');
+                // document.getElementById("tempPic").appendChild(picForm);
+                //
+                // var img = document.createElement('img');
+                // var link = canvas.toDataURL();
+                // var value = username;
+                // img.setAttribute("src", link);
+                // img.setAttribute("value", value);
+                // document.querySelector('.picForm:last-child').appendChild(img);
+                //
+                // var btnUpload = document.createElement('button');
+                // btnUpload.setAttribute('type', 'submit');
+                // btnUpload.setAttribute('name', 'upload');
+                // btnUpload.setAttribute('value', link);
+                // btnUpload.appendChild(document.createTextNode("Зпостить"));
+                // document.querySelector('.picForm:last-child').appendChild(btnUpload);
+                //
+                // var btnDownload = document.createElement('button');
+                // btnDownload.setAttribute('type', 'submit');
+                // btnDownload.setAttribute('name', 'download');
+                // btnDownload.setAttribute('value', 'link');
+                // btnDownload.appendChild(document.createTextNode("Загрузить"));
+                // document.querySelector('.picForm:last-child').appendChild(btnDownload);
+                //
+                //
+                // var link = document.createElement('a');
+                // link.innerHTML = 'download image';
+                // link.addEventListener('click', function(ev) {
+                //     link.href = canvas.toDataURL();
+                //     link.download = "mypainting.png";
+                // }, false);
+                // document.getElementById("try").appendChild(link);
+                ev.preventDefault();
+            } else {
+                alert("fuck u");
+            }
         }, false);
 
         clearphoto();
