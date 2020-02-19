@@ -2,6 +2,30 @@
 session_start();
 require_once '../config/db.php';
 $act = new Db();
+
+if (isset($_SESSION['logged'])) {
+
+    $username = $_SESSION['logged'];
+
+    $DB_DSN = 'mysql:host=127.0.0.1;dbname=camagru';
+    $DB_USER = 'root';
+    $DB_PASSWORD = '';
+    try {
+        $db = new PDO($DB_DSN, $DB_USER, $DB_PASSWORD);
+        $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    } catch (PDOException $e) {
+    }
+
+    $st = $db->prepare("SELECT online FROM users WHERE username = ?");
+    $st->bindParam(1, $username);
+    $st->execute();
+    $onlineDB = $st->fetchColumn();
+
+    if ($onlineDB == 0) {
+        header('Location: http://127.0.0.1/Camagru/index.php');
+        exit;
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -23,12 +47,27 @@ $act = new Db();
             $dir = '../IMG/'; // Папка с изображениями
             $files = scandir($dir); // Беру всё содержимое директории
 
+            $DB_DSN = 'mysql:host=127.0.0.1;dbname=camagru';
+            $DB_USER = 'root';
+            $DB_PASSWORD = '';
+            try {
+                $db = new PDO($DB_DSN, $DB_USER, $DB_PASSWORD);
+                $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            }
+            catch (PDOException $e) {
+            }
+            $username = $_SESSION['logged'];
+            $st = $db->prepare("SELECT id_user FROM users WHERE username = ?");
+            $st->bindParam(1, $username);
+            $st->execute();
+            $usernameDB = $st->fetchColumn();
+
             $path = $dir . $_POST['commentbtn']; // Получаем путь к картинке
             $picname = $_POST['commentbtn'];
             echo $picname;
             echo "<br>";
             echo "<img src='$path' alt='#' width='400' />"; // Вывод превью картинки
-            $act->showComments($picname, $_SESSION['logged']);
+            $act->showComments($picname, $usernameDB);
             ?>
             <form method="post" action="../core/commentCore.php">
                 <p><b>Введите ваш комментарий:</b></p>

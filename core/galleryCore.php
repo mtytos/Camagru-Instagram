@@ -20,10 +20,15 @@ catch (PDOException $e) {
 if ($_POST['likebtn']) {
 
     $username = $_SESSION['logged'];
+    $st = $db->prepare("SELECT id_user FROM users WHERE username = ?");
+    $st->bindParam(1, $username);
+    $st->execute();
+    $usernameDB = $st->fetchColumn();
+
     $table = $_POST['likebtn'] . '.like';
 
-    $st = $db->prepare("SELECT id_like FROM `$table` WHERE username = ?");
-    $st->bindParam(1, $username);
+    $st = $db->prepare("SELECT id_like FROM `$table` WHERE id_user = ?");
+    $st->bindParam(1, $usernameDB);
     $st->execute();
     $idLikeDB = $st->fetchColumn();
 
@@ -33,21 +38,21 @@ if ($_POST['likebtn']) {
         $st->execute();
     }
     else {
-        $st = $db->prepare("INSERT INTO `$table` (username) VALUES(?)");
-        $st->bindParam(1, $username);
+        $st = $db->prepare("INSERT INTO `$table` (id_user) VALUES(?)");
+        $st->bindParam(1, $usernameDB);
         $st->execute();
 
         $checkUser = explode('.', $table);
         $userToBD = $checkUser[1];
 
-        $st = $db->prepare("SELECT like_alert FROM users WHERE username = ?");
+        $st = $db->prepare("SELECT like_alert FROM users WHERE id_user = ?");
         $st->bindParam(1, $userToBD);
         $st->execute();
         $likeAlert = $st->fetchColumn();
 
         if ($likeAlert == 1) {
 
-            $st = $db->prepare("SELECT email FROM users WHERE username = ?");
+            $st = $db->prepare("SELECT email FROM users WHERE id_user = ?");
             $st->bindParam(1, $userToBD);
             $st->execute();
             $emailAlert = $st->fetchColumn();
@@ -61,7 +66,6 @@ if ($_POST['likebtn']) {
 
 if ($_POST['deletebtn']) {
 
-    $username = $_SESSION['logged'];
     $tableLike = $_POST['deletebtn'] . '.like';
     $tableComment = $_POST['deletebtn'] . '.comment';
 

@@ -48,10 +48,10 @@ class Db {
         return $profile_alert;
     }
 
-    public function btnLike($username, $table) {
+    public function btnLike($idUser, $table) {
         $tableName = $table . '.like';
-        $st = $this->db->prepare("SELECT id_like FROM `$tableName` WHERE username = ?");
-        $st->bindParam(1, $username);
+        $st = $this->db->prepare("SELECT id_like FROM `$tableName` WHERE id_user = ?");
+        $st->bindParam(1, $idUser);
         $st->execute();
         $idLikeDB = $st->fetchColumn();
         return $idLikeDB;
@@ -84,10 +84,26 @@ class Db {
         $checkUser = explode('.', $table);
         echo "<form method='post' action='../core/commentCore.php'>";
         for ($i = 0; $i < count($total); $i++) {
-            echo $total[$i]['username'] . ": " . $total[$i]['comment'];
+
+            $DB_DSN = 'mysql:host=127.0.0.1;dbname=camagru';
+            $DB_USER = 'root';
+            $DB_PASSWORD = '';
+            try {
+                $db = new PDO($DB_DSN, $DB_USER, $DB_PASSWORD);
+                $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            }
+            catch (PDOException $e) {
+            }
+            $idUser = $total[$i]['id_user'];
+            $st = $db->prepare("SELECT username FROM users WHERE id_user = ?");
+            $st->bindParam(1, $idUser);
+            $st->execute();
+            $userComName = $st->fetchColumn();
+
+            echo $userComName . ": " . $total[$i]['comment'];
             echo "<br>";
             $idDel = $total[$i]['id_comment'];
-            if ($user == $checkUser[1] || $user == $total[$i]['username']) {
+            if ($user == $checkUser[1] || $user == $total[$i]['id_user']) {
                 echo "<button type='submit' name='deleteComment' value='$idDel.$tableName'>Delete</button>";
             }
             echo "<br>";

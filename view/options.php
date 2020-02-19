@@ -2,6 +2,30 @@
 session_start();
 require_once '../config/db.php';
 $act = new Db();
+
+if (isset($_SESSION['logged'])) {
+
+    $username = $_SESSION['logged'];
+
+    $DB_DSN = 'mysql:host=127.0.0.1;dbname=camagru';
+    $DB_USER = 'root';
+    $DB_PASSWORD = '';
+    try {
+        $db = new PDO($DB_DSN, $DB_USER, $DB_PASSWORD);
+        $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    } catch (PDOException $e) {
+    }
+
+    $st = $db->prepare("SELECT online FROM users WHERE username = ?");
+    $st->bindParam(1, $username);
+    $st->execute();
+    $onlineDB = $st->fetchColumn();
+
+    if ($onlineDB == 0) {
+        header('Location: http://127.0.0.1/Camagru/index.php');
+        exit;
+    }
+}
 ?>
 
 <!DOCTYPE html>

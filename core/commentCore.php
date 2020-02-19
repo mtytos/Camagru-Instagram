@@ -18,25 +18,30 @@ try {
 if ($_POST['btnCommentSend']) {
 
     $username = $_SESSION['logged'];
+    $st = $db->prepare("SELECT id_user FROM users WHERE username = ?");
+    $st->bindParam(1, $username);
+    $st->execute();
+    $usernameDB = $st->fetchColumn();
+
     $table = $_POST['btnCommentSend'] . '.comment';
     $comment = htmlspecialchars($_POST['commentText']);
 
-    $st = $db->prepare("INSERT INTO `$table` (username, comment) VALUES(?, ?)");
-    $st->bindParam(1, $username);
+    $st = $db->prepare("INSERT INTO `$table` (id_user, comment) VALUES(?, ?)");
+    $st->bindParam(1, $usernameDB);
     $st->bindParam(2, $comment);
     $st->execute();
 
     $checkUser = explode('.', $table);
     $userToBD = $checkUser[1];
 
-    $st = $db->prepare("SELECT comment_alert FROM users WHERE username = ?");
+    $st = $db->prepare("SELECT comment_alert FROM users WHERE id_user = ?");
     $st->bindParam(1, $userToBD);
     $st->execute();
     $commentAlert = $st->fetchColumn();
 
     if ($commentAlert == 1) {
 
-        $st = $db->prepare("SELECT email FROM users WHERE username = ?");
+        $st = $db->prepare("SELECT email FROM users WHERE id_user = ?");
         $st->bindParam(1, $userToBD);
         $st->execute();
         $emailAlert = $st->fetchColumn();

@@ -20,51 +20,161 @@ $act = new Db();
         <div class="main">
             <?php
 
-            $dir = '../IMG/'; // Папка с изображениями
-            $files = scandir($dir); // Беру всё содержимое директории
+            if (isset($_SESSION['logged'])) {
 
-            for ($i = count($files) - 1; $i != 0; $i--) {
-                if (($files[$i] != ".") && ($files[$i] != "..")) {
-                    $path = $dir . $files[$i]; // Получаем путь к картинке
-                    // создаю форму для картинки
-                    $postLike = $act->countLike($files[$i]);
-                    $postComment = $act->countComment($files[$i]);
+                $chekTool = $_SESSION['logged'];
 
-                    $b = explode(".", $files[$i]);
-                    $c = substr_replace($b[0], ".", 4, 0);
-                    $c = substr_replace($c, ".", 7, 0);
-                    $c = substr_replace($c, ".", 10, 0);
-                    $c = substr($c, 0, 10);
+                $DB_DSN = 'mysql:host=127.0.0.1;dbname=camagru';
+                $DB_USER = 'root';
+                $DB_PASSWORD = '';
+                try {
+                    $db = new PDO($DB_DSN, $DB_USER, $DB_PASSWORD);
+                    $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                } catch (PDOException $e) {
+                }
 
-                    echo "<form method='post' action='../core/galleryCore.php'>";
-                    echo $files[$i];
-                    echo "<br>";
-                    echo "<img src='$path' alt='$files[$i]' width='200' />"; // Вывод превью картинки
-                    echo "<br>";
-                    echo "Posted - " . $c;
-                    echo "<br>";
-                    echo "Like = " . $postLike;
-                    echo "<br>";
-                    echo "Comments = " . $postComment;
-                    echo "<br>";
-                    $btnName = "Like";
-                    if ($act->btnLike($_SESSION['logged'], $files[$i])) {
-                        $btnName = 'Unlike';
+                $st = $db->prepare("SELECT online FROM users WHERE username = ?");
+                $st->bindParam(1, $chekTool);
+                $st->execute();
+                $onlineDB = $st->fetchColumn();
+
+                if ($onlineDB == 1) {
+
+                    $dir = '../IMG/'; // Папка с изображениями
+                    $files = scandir($dir); // Беру всё содержимое директории
+
+                    $DB_DSN = 'mysql:host=127.0.0.1;dbname=camagru';
+                    $DB_USER = 'root';
+                    $DB_PASSWORD = '';
+                    try {
+                        $db = new PDO($DB_DSN, $DB_USER, $DB_PASSWORD);
+                        $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                    } catch (PDOException $e) {
                     }
-                    else {
-                        $btnName = 'Like';
-                    }
-                    echo "<button type='submit' name='likebtn' value='$files[$i]'>" . $btnName ."</button>";
+                    $username = $_SESSION['logged'];
 
-                    // И тут будет еще одна кнопка "УДАЛИТЬ", видима только для владельца этой фотографии
-                    $checkUser = explode('.', $files[$i]);
-                    if ($_SESSION['logged'] == $checkUser[1]) {
-                        echo "<button type='submit' name='deletebtn' value='$files[$i]'>Delete</button>";
+                    $st = $db->prepare("SELECT id_user FROM users WHERE username = ?");
+                    $st->bindParam(1, $username);
+                    $st->execute();
+                    $usernameDB = $st->fetchColumn();
+
+                    for ($i = count($files) - 1; $i != 0; $i--) {
+                        if (($files[$i] != ".") && ($files[$i] != "..")) {
+                            $path = $dir . $files[$i]; // Получаем путь к картинке
+                            // создаю форму для картинки
+                            $postLike = $act->countLike($files[$i]);
+                            $postComment = $act->countComment($files[$i]);
+
+                            $b = explode(".", $files[$i]);
+                            $c = substr_replace($b[0], ".", 4, 0);
+                            $c = substr_replace($c, ".", 7, 0);
+                            $c = substr_replace($c, ".", 10, 0);
+                            $c = substr($c, 0, 10);
+
+                            echo "<form method='post' action='../core/galleryCore.php'>";
+                            echo $files[$i];
+                            echo "<br>";
+                            echo "<img src='$path' alt='$files[$i]' width='200' />"; // Вывод превью картинки
+                            echo "<br>";
+                            echo "Posted - " . $c;
+                            echo "<br>";
+                            echo "Like = " . $postLike;
+                            echo "<br>";
+                            echo "Comments = " . $postComment;
+                            echo "<br>";
+                            $btnName = "Like";
+                            if ($act->btnLike($usernameDB, $files[$i])) {
+                                $btnName = 'Unlike';
+                            } else {
+                                $btnName = 'Like';
+                            }
+                            echo "<button type='submit' name='likebtn' value='$files[$i]'>" . $btnName . "</button>";
+
+                            // И тут будет еще одна кнопка "УДАЛИТЬ", видима только для владельца этой фотографии
+                            $checkUser = explode('.', $files[$i]);
+                            if ($usernameDB == $checkUser[1]) {
+                                echo "<button type='submit' name='deletebtn' value='$files[$i]'>Delete</button>";
+                            }
+                            echo "</form>";
+                            echo "<form method='post' action='comment.php'>";
+                            echo "<button type='submit' name='commentbtn' value='$files[$i]'>Comment</button>";
+                            echo "</form>";
+                        }
                     }
-                    echo "</form>";
-                    echo "<form method='post' action='comment.php'>";
-                    echo "<button type='submit' name='commentbtn' value='$files[$i]'>Comment</button>";
-                    echo "</form>";
+                }
+                else {
+                    $dir = '../IMG/'; // Папка с изображениями
+                    $files = scandir($dir); // Беру всё содержимое директории
+
+                    for ($i = count($files) - 1; $i != 0; $i--) {
+                        if (($files[$i] != ".") && ($files[$i] != "..")) {
+                            $path = $dir . $files[$i]; // Получаем путь к картинке
+                            // создаю форму для картинки
+                            $postLike = $act->countLike($files[$i]);
+                            $postComment = $act->countComment($files[$i]);
+
+                            $b = explode(".", $files[$i]);
+                            $c = substr_replace($b[0], ".", 4, 0);
+                            $c = substr_replace($c, ".", 7, 0);
+                            $c = substr_replace($c, ".", 10, 0);
+                            $c = substr($c, 0, 10);
+
+                            echo "<form>";
+                            echo $files[$i];
+                            echo "<br>";
+                            echo "<img src='$path' alt='$files[$i]' width='200' />"; // Вывод превью картинки
+                            echo "<br>";
+                            echo "Posted - " . $c;
+                            echo "<br>";
+                            echo "Like = " . $postLike;
+                            echo "<br>";
+                            echo "Comments = " . $postComment;
+                            echo "<br>";
+                            $btnName = "Like";
+                            echo "<button type='button'><a href='../index.php'>Like</a></button>";
+                            echo "</form>";
+                            echo "<form>";
+                            echo "<button type='button'><a href='../index.php'>Comment</a></button>";
+                            echo "</form>";
+                        }
+                    }
+                }
+            }
+            else {
+                $dir = '../IMG/'; // Папка с изображениями
+                $files = scandir($dir); // Беру всё содержимое директории
+
+                for ($i = count($files) - 1; $i != 0; $i--) {
+                    if (($files[$i] != ".") && ($files[$i] != "..")) {
+                        $path = $dir . $files[$i]; // Получаем путь к картинке
+                        // создаю форму для картинки
+                        $postLike = $act->countLike($files[$i]);
+                        $postComment = $act->countComment($files[$i]);
+
+                        $b = explode(".", $files[$i]);
+                        $c = substr_replace($b[0], ".", 4, 0);
+                        $c = substr_replace($c, ".", 7, 0);
+                        $c = substr_replace($c, ".", 10, 0);
+                        $c = substr($c, 0, 10);
+
+                        echo "<form>";
+                        echo $files[$i];
+                        echo "<br>";
+                        echo "<img src='$path' alt='$files[$i]' width='200' />"; // Вывод превью картинки
+                        echo "<br>";
+                        echo "Posted - " . $c;
+                        echo "<br>";
+                        echo "Like = " . $postLike;
+                        echo "<br>";
+                        echo "Comments = " . $postComment;
+                        echo "<br>";
+                        $btnName = "Like";
+                        echo "<button type='button'><a href='../index.php'>Like</a></button>";
+                        echo "</form>";
+                        echo "<form>";
+                        echo "<button type='button'><a href='../index.php'>Comment</a></button>";
+                        echo "</form>";
+                    }
                 }
             }
             ?>
