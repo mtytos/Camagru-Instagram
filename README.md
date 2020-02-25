@@ -8,9 +8,9 @@
 <b>Фронт</b> - HTML, CSS (Grid), JavaSript + Ajax <br>
 
 ## ATTENTION! <br>
-<em>config/database.php</em> - настройки подключения к БД <br>
-<em>config/setup.php</em> - создает базу данных и таблицы необходимые для сайта <br>
-- также будет автоматически создан user - admin / admin для быстроего использования сайта </br>
+- <em>config/database.php</em> - настройки подключения к БД <br>
+- <em>config/setup.php</em> - создает базу данных и таблицы необходимые для сайта <br>
+также будет автоматически создан user - admin / admin для быстроего использования сайта </br>
 
 ## РЕАЛИЗОВАНО:<br>
 #### Sing In / Sing Up<br>
