@@ -39,4 +39,6 @@
 - Владелец может удалить пост / комментарии<br>
 - Галерея доступна незарегистрированным пользователем в режиме просмотра без возможности взаимодействия
 
+<img align="center" src="https://raw.githubusercontent.com/mtytos/CV/master/login.png?token=ANB3U4P6IFHCSD24LH7UYQS6KV4GY">
+
 ![disign](https://raw.githubusercontent.com/mtytos/CV/master/login.png?token=ANB3U4P6IFHCSD24LH7UYQS6KV4GY)
