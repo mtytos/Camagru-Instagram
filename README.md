@@ -1,7 +1,7 @@
 ## Camagru - упрощенный Instargram <br>
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/mtytos/CV/master/login.png?token=ANB3U4JNJ62LJMVXOJR2OLS6KV5QI">
+  <img src="https://raw.githubusercontent.com/mtytos/CV/master/login.png?token=ANB3U4NAOJFFHGE6NLEAKCC6KV7XY">
 </p><br>
 
 - <b>Серверная часть</b> - PHP <br>
