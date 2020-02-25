@@ -40,19 +40,6 @@
 
 - logout с основных страниц
 
-<b>Почему именно такой функционал и почему иммено такой стэк?</b><br>
-Все в соответствии с Техническим заданием ( лежит в корне папка /DescriptionScreenshots)</em><br>
-
-И чтобы вам не искать, скрины ТЗ закреплены ниже:
-
-![Image alt](https://github.com/mtytos/CAMAGRU-INSTAGRAM/raw/master/DescriptionScreenshots/MandatoryPart1.png)
-![Image alt](https://github.com/mtytos/CAMAGRU-INSTAGRAM/raw/master/DescriptionScreenshots/MandatoryPart2_3.png)
-![Image alt](https://github.com/mtytos/CAMAGRU-INSTAGRAM/raw/master/DescriptionScreenshots/MandatoryPart4.png)
-![Image alt](https://github.com/mtytos/CAMAGRU-INSTAGRAM/raw/master/DescriptionScreenshots/MandatoryPart5.png)
-![Image alt](https://github.com/mtytos/CAMAGRU-INSTAGRAM/raw/master/DescriptionScreenshots/BonusPart.png)
-
-
-
 
 
 
