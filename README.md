@@ -2,7 +2,7 @@
 
 <p align="center">
   <img src="https://raw.githubusercontent.com/mtytos/CV/master/login.png?token=ANB3U4JNJ62LJMVXOJR2OLS6KV5QI">
-</p><br><br>
+</p><br>
 
 - <b>Серверная часть</b> - PHP <br>
 - <b>База данных</b> - MySQL + PDO <br>
