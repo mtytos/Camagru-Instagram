@@ -7,22 +7,13 @@ if (isset($_SESSION['logged'])) {
 
     $username = $_SESSION['logged'];
 
-    $DB_DSN = 'mysql:host=127.0.0.1;dbname=camagru';
-    $DB_USER = 'root';
-    $DB_PASSWORD = '';
-    try {
-        $db = new PDO($DB_DSN, $DB_USER, $DB_PASSWORD);
-        $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    } catch (PDOException $e) {
-    }
-
-    $st = $db->prepare("SELECT online FROM users WHERE username = ?");
+    $st = $act->db->prepare("SELECT online FROM users WHERE username = ?");
     $st->bindParam(1, $username);
     $st->execute();
     $onlineDB = $st->fetchColumn();
 
     if ($onlineDB == 0) {
-        header('Location: http://127.0.0.1/Camagru/index.php');
+        header('Location: http://localhost/index.php');
         exit;
     }
 }
@@ -33,12 +24,20 @@ if (isset($_SESSION['logged'])) {
 <head>
     <meta charset="utf-8">
     <title>Options</title>
-    <link href="../style/style.css" rel="stylesheet">
+    <link href="../style/styleOptions.css" rel="stylesheet">
 </head>
 <body>
 <div class="container">
+    <div class="home">
+        <p><a class="gradient-link" href="home.php">Home</a></p>
+    </div>
     <div class="header">
         <p class="gradient">CAMAGRU</p>
+    </div>
+    <div class="exit">
+        <form action="../core/logoutCore.php" method="post">
+            <button id="logout" name='exit' value='logout'>Logout</button>
+        </form>
     </div>
     <div class="content">
         <div class="main">
@@ -46,45 +45,50 @@ if (isset($_SESSION['logged'])) {
                 <p>Уведомления о лайках ваших постов - <b>
                         <?php
                             if ($act->likeInfo($_SESSION['logged']) == 1) {
-                                echo 'Включены';
+                                echo "<span style='color: green;'>Включены</span>";
                             }
                             else {
-                                echo 'Отключены';
+                                echo "<span style='color: red;'>Отключены</span>";
                             }
-                        ?></b></p>
-                <button type="submit" name="action" value="likeInfo">Изменить</button>
+                        ?></b></p><br>
+                <button class='button-gall' type="submit" name="action" value="likeInfo">Изменить</button>
             </form>
+            <br><br>
             <form action="../core/optionsCore.php" method="post">
                 <p>Уведомления о комментариях ваших постов - <b>
                         <?php
                         if ($act->commentInfo($_SESSION['logged']) == 1) {
-                            echo 'Включены';
+                            echo "<span style='color: green;'>Включены</span>";
                         }
                         else {
-                            echo 'Отключены';
+                            echo "<span style='color: red;'>Отключены</span>";
                         }
-                        ?></b></p>
-                <button type="submit" name="action" value="commentInfo">Изменить</button>
+                        ?></b></p><br>
+                <button class='button-gall' type="submit" name="action" value="commentInfo">Изменить</button>
             </form>
+            <br><br>
             <form action="../core/optionsCore.php" method="post">
                 <p>Уведомления об изменении данных профиля - <b>
                         <?php
                         if ($act->profileInfo($_SESSION['logged']) == 1) {
-                            echo 'Включены';
+                            echo "<span style='color: green;'>Включены</span>";
                         }
                         else {
-                            echo 'Отключены';
+                            echo "<span style='color: red;'>Отключены</span>";
                         }
-                        ?></b></p>
-                <button type="submit" name="action" value="profileInfo">Изменить</button>
+                        ?></b></p><br>
+                <button class='button-gall' type="submit" name="action" value="profileInfo">Изменить</button>
             </form>
-            <a class="link-btn" href='reset.php'>Изменить пароль</a>
-            <br/>
-            <a class="link-btn" href='newName.php'>Изменить имя профиля</a>
-            <br/>
-            <a class="link-btn" href='newEmail.php'>Изменить почтовый адрес аккаунта</a>
-            <br/>
-            <a class="link-btn" href='home.php'>Home</a>
+            <br><br>
+            <hr>
+            <br>
+            <h3>Раздел измененния данных профиля</h3>
+            <br>
+            <a class="gradient-link" href='newEmail.php'>Изменить почтовый адрес аккаунта</a>
+            <br><br>
+            <a class="gradient-link" href='reset.php'>Изменить пароль</a>
+            <br><br>
+            <a class="gradient-link" href='newName.php'>Изменить имя профиля</a>
         </div>
     </div>
     <div class="footer">

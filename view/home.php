@@ -1,26 +1,19 @@
 <?php
 session_start();
+require_once '../config/db.php';
+$act = new Db();
 
 if (isset($_SESSION['logged'])) {
 
     $username = $_SESSION['logged'];
 
-    $DB_DSN = 'mysql:host=127.0.0.1;dbname=camagru';
-    $DB_USER = 'root';
-    $DB_PASSWORD = '';
-    try {
-        $db = new PDO($DB_DSN, $DB_USER, $DB_PASSWORD);
-        $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    } catch (PDOException $e) {
-    }
-
-    $st = $db->prepare("SELECT online FROM users WHERE username = ?");
+    $st = $act->db->prepare("SELECT online FROM users WHERE username = ?");
     $st->bindParam(1, $username);
     $st->execute();
     $onlineDB = $st->fetchColumn();
 
     if ($onlineDB == 0) {
-        header('Location: http://127.0.0.1/Camagru/index.php');
+        header('Location: http://localhost/index.php');
         exit;
     }
 }
@@ -50,13 +43,17 @@ if (isset($_SESSION['logged'])) {
         <p class="nav">Hello, <?php echo $_SESSION['logged']; ?></p>
     </div>
     <div class="gallery">
-        <button type="button" id="gallery"><a class="link-btn" href="gallery.php">Gallery</a></button>
+        <div class="forlink">
+            <a class="link-btn" href="gallery.php">Gallery</a>
+        </div>
     </div>
     <div class="info">
         <p class="nav">Online</p>
     </div>
     <div class="options">
-        <button type="button" id="options"><a class="link-btn" href="options.php">Options</a></button>
+        <div class="forlink">
+            <a class="link-btn" href="options.php">Options</a>
+        </div>
     </div>
     <div class="exit">
         <form action="../core/logoutCore.php" method="post">
@@ -80,12 +77,16 @@ if (isset($_SESSION['logged'])) {
             </div>
             <div class="downloadPic">
                 <form method="post" enctype="multipart/form-data" action="../core/downloadCore.php">
-                    <label><input type="radio" name="mask" value="https://raw.githubusercontent.com/mtytos/Hackaton-PhotoLab-TikTok/master/one.png" onclick="EnableSubmit()">
-                        <img src="https://raw.githubusercontent.com/mtytos/Hackaton-PhotoLab-TikTok/master/one.png"> </label>
-                    <label><input type="radio" name="mask" value="https://raw.githubusercontent.com/mtytos/Hackaton-PhotoLab-TikTok/master/moustache.png" onclick="EnableSubmit()">
-                        <img src="https://raw.githubusercontent.com/mtytos/Hackaton-PhotoLab-TikTok/master/moustache.png" width="200"></label>
-                    <label><input type="radio" name="mask" value="https://raw.githubusercontent.com/mtytos/Hackaton-PhotoLab-TikTok/master/lips.png" onclick="EnableSubmit()">
-                        <img src="https://raw.githubusercontent.com/mtytos/Hackaton-PhotoLab-TikTok/master/lips.png" width="100"></label>
+                    <label><input type="radio" name="mask" value="https://raw.githubusercontent.com/mtytos/Hackaton-PhotoLab-TikTok/master/tryy/one.png" onclick="EnableSubmit()">
+                        <img src="https://raw.githubusercontent.com/mtytos/Hackaton-PhotoLab-TikTok/master/tryy/one.png"> </label>
+                    <label><input type="radio" name="mask" value="https://raw.githubusercontent.com/mtytos/Hackaton-PhotoLab-TikTok/master/tryy/boroda-png.png" onclick="EnableSubmit()">
+                        <img src="https://raw.githubusercontent.com/mtytos/Hackaton-PhotoLab-TikTok/master/tryy/boroda-png.png" width="200"></label>
+                    <label><input type="radio" name="mask" value="https://raw.githubusercontent.com/mtytos/Hackaton-PhotoLab-TikTok/master/tryy/petuh.png" onclick="EnableSubmit()">
+                        <img src="https://raw.githubusercontent.com/mtytos/Hackaton-PhotoLab-TikTok/master/tryy/petuh.png" width="100"></label>
+                    <label><input type="radio" name="mask" value="https://raw.githubusercontent.com/mtytos/Hackaton-PhotoLab-TikTok/master/tryy/shapka-santy.png" onclick="EnableSubmit()">
+                        <img src="https://raw.githubusercontent.com/mtytos/Hackaton-PhotoLab-TikTok/master/tryy/shapka-santy.png" width="100"></label>
+                    <label><input type="radio" name="mask" value="https://raw.githubusercontent.com/mtytos/Hackaton-PhotoLab-TikTok/master/tryy/star_wars.png" onclick="EnableSubmit()">
+                        <img src="https://raw.githubusercontent.com/mtytos/Hackaton-PhotoLab-TikTok/master/tryy/star_wars.png" width="100"></label>
                     <br><br>
                     <input type="file" name="file" accept="image/jpeg">
                     <input type="submit" id="button1" name="download" value="download" disabled="disabled">

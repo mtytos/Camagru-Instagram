@@ -1,19 +1,8 @@
 <?php
-
-$DB_DSN = 'mysql:host=127.0.0.1;dbname=camagru';
-$DB_USER = 'root';
-$DB_PASSWORD = '';
-
-try {
-    $db = new PDO($DB_DSN, $DB_USER, $DB_PASSWORD);
-    $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-//    echo "Successfully connected to the database - ajax";
-//    echo "<br>";
-}
-catch (PDOException $e) {
-//    echo "Creating or re-creating the database schema FAILED" . $e->getMessage();
-//    echo "<br>";
-}
+session_start();
+date_default_timezone_set('Europe/Moscow');
+require_once '../config/db.php';
+$act = new Db();
 
 // получаю переменные с данными инпутов
 $username = isset($_POST['username']) ? $_POST['username'] : '';
@@ -23,11 +12,6 @@ $email = isset($_POST['email']) ? $_POST['email'] : '';
 
 $ok = true;
 $messages = array();
-
-//$username = 'kiri';
-//$password = 'Prosto9!';
-//$repassword = 'Prosto9!';
-//$email = 'topic99@mail.ru';
 
 // Проверка на пустые инпуты, хотя...можно было просто инпутам формы добавить require и сократить код тут. Может так и сделаю
 if ( !isset($username) || empty($username) ) {
@@ -49,7 +33,7 @@ if ( !isset($password) || empty($password) ) {
 // Ошибка пароля
 if (!empty($password) && !preg_match('/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@!%*#?&])[A-Za-z\d@!%*#?&]{6,}/', $password)) {
     $ok = false;
-    $messages[] = 'Password should contain one uppercase and lowercase word, one figure and special sign - @!%*#?&';
+    $messages[] = 'Password must be min six characters and contain: one uppercase, one lowercase, one figure and one special sign - @!%*#?&';
 }
 
 if ( !isset($repassword) || empty($repassword) ) {
@@ -68,43 +52,17 @@ if (!empty($email) && !filter_var($email, FILTER_VALIDATE_EMAIL)) {
     $messages[] = 'Incorrect email';
 }
 
-
 // получаю id из БД для проверки на существование nickname
-$st = $db->prepare("SELECT id_user FROM users WHERE username = ?");
+$st = $act->db->prepare("SELECT id_user FROM users WHERE username = ?");
 $st->bindParam(1, $username);
 $st->execute();
 $checkName = $st->fetchColumn();
-//echo $checkName;
-//echo "<br/>";
 
 // получаю id из БД для проверки на существование email
-$st = $db->prepare("SELECT id_user FROM users WHERE email = ?");
+$st = $act->db->prepare("SELECT id_user FROM users WHERE email = ?");
 $st->bindParam(1, $email);
 $st->execute();
 $checkEmail = $st->fetchColumn();
-//echo $checkEmail;
-//echo "<br/>";
-//
-//echo $username;
-//echo "<br/>";
-//echo $repassword;
-//echo "<br/>";
-
-// $stp = $db->prepare("SELECT pass FROM users WHERE id = ?");
-// $stp->bindParam(1, $idNameDB);;
-// $stp->execute();
-// $passDB = $stp->fetchColumn();
-//echo $passDB;
-//echo "<br/>";
-
-//if ($idNameDB) {
-//    echo 'Yes';
-//    echo "<br/>";
-//}
-//else {
-//    echo 'No';
-//    echo "<br/>";
-//}
 
 if ($ok) {
     if ($checkName) {
@@ -126,7 +84,7 @@ if ($ok) {
                 $password = md5($password . $secret1);
                 $secret2 = 'Wars-9';
                 $token = md5(date("Y-m-d H:i:s") . $secret2);
-                insertUserData($username, $email, $password, $token, $db);
+                insertUserData($username, $email, $password, $token, $act);
                 $ok = true;
                 $messages[] = 'Successful create!';
                 require_once 'Mail.php';
@@ -137,7 +95,7 @@ if ($ok) {
     }
 }
 
-function insertUserData($username, $email, $password, $token, $db) {
+function insertUserData($username, $email, $password, $token, $act) {
 
     $status = 0;
     $like_alert = 1;
@@ -145,7 +103,7 @@ function insertUserData($username, $email, $password, $token, $db) {
     $profile_alert = 1;
     $online = 0;
 
-    $st = $db->prepare("INSERT INTO users (username, email, password, status, token, like_alert, comment_alert, profile_alert, online) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)");
+    $st = $act->db->prepare("INSERT INTO users (username, email, password, status, token, like_alert, comment_alert, profile_alert, online) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)");
     $st->bindParam(1, $username);
     $st->bindParam(2, $email);
     $st->bindParam(3, $password);
@@ -158,20 +116,12 @@ function insertUserData($username, $email, $password, $token, $db) {
     $st->execute();
 }
 
-
-
-
-
 echo json_encode(
     array(
         'ok' => $ok,
         'messages' => $messages
     )
 );
-
-
-// create table users (id INT NOT NULL AUTO_INCREMENT, name VARCHAR(20) NOT NULL, pass VARCHAR(30) NOT NULL, PRIMARY KEY (id));
-// INSERT INTO users (name, pass) VALUES ("vova", "1234"), ("alex", "1q2w"), ("kirill", "floda");
 
 
 ?>

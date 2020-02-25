@@ -4,8 +4,6 @@ class Mail {
 
     public function sendMail($email, $token) {
 
-        //$to = 'orividerchi2013@yandex.ru';
-        //$to = 'storylove788@gmail.com';
         $to = $email;
 
         // тема письма
@@ -23,7 +21,7 @@ class Mail {
 
         //ОБЯЗАТЕЛЬНО ИЗМЕНИТЬ ЛОКАЛХОСТ или ДОБАВИТЬ ПОРТЫ ПОД СВОЙ СЕРВЕР
         $message3 = '
-            <p>And click on this link <a href="http://127.0.0.1/Camagru/view/activation.php">activate account</a>.</p>
+            <p>And click on this link <a href="http://localhost/view/activation.php">activate account</a>.</p>
             <p>If you not registered on site, please, ignoring this message.</p>
             </body>
             </html>';
@@ -35,18 +33,11 @@ class Mail {
         $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
 
         // Отправляем
-        if (mail($to, $subject, $message, $headers)) {
-            //echo 'goof';
-        }
-        else {
-            echo 'noting';
-        }
+        mail($to, $subject, $message, $headers);
     }
 
     public function sendResetMail($email, $token) {
 
-        //$to = 'orividerchi2013@yandex.ru';
-        //$to = 'storylove788@gmail.com';
         $to = $email;
 
         // тема письма
@@ -63,7 +54,7 @@ class Mail {
         $message2 = '<p>Copy this HASH - ' . $token . '</p>';
 
         //ОБЯЗАТЕЛЬНО ИЗМЕНИТЬ ЛОКАЛХОСТ или ДОБАВИТЬ ПОРТЫ ПОД СВОЙ СЕРВЕР
-        $message3 = '<p>And click on this link <a href="http://127.0.0.1/Camagru/view/newPass.php">reset password</a>.</p>
+        $message3 = '<p>And click on this link <a href="http://localhost/view/newPass.php">reset password</a>.</p>
                     <p>If you not reset password, please, ignoring this message.</p>
                     </body>
                     </html>';
@@ -74,12 +65,7 @@ class Mail {
         $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
 
         // Отправляем
-        if (mail($to, $subject, $message, $headers)) {
-            //echo 'goof';
-        }
-        else {
-            echo 'noting';
-        }
+        mail($to, $subject, $message, $headers);
     }
 
 
@@ -101,7 +87,7 @@ class Mail {
         $message2 = '<p>Copy this HASH - ' . $token . '</p>';
 
         //ОБЯЗАТЕЛЬНО ИЗМЕНИТЬ ЛОКАЛХОСТ или ДОБАВИТЬ ПОРТЫ ПОД СВОЙ СЕРВЕР
-        $message3 = '<p>And click on this link <a href="http://127.0.0.1/Camagru/view/newNameCreate.php">change nickname</a>.</p>
+        $message3 = '<p>And click on this link <a href="http://localhost/view/newNameCreate.php">change nickname</a>.</p>
                     <p>If you not change nickname, please, ignoring this message.</p>
                     </body>
                     </html>';
@@ -134,7 +120,7 @@ class Mail {
         $message2 = '<p>Copy this HASH - ' . $token . '</p>';
 
         //ОБЯЗАТЕЛЬНО ИЗМЕНИТЬ ЛОКАЛХОСТ или ДОБАВИТЬ ПОРТЫ ПОД СВОЙ СЕРВЕР
-        $message3 = '<p>And click on this link <a href="http://127.0.0.1/Camagru/view/newEmailCreate.php">change email</a>.</p>
+        $message3 = '<p>And click on this link <a href="http://localhost/view/newEmailCreate.php">change email</a>.</p>
                     <p>If you not change email, please, ignoring this message.</p>
                     </body>
                     </html>';

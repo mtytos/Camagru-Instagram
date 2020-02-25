@@ -106,12 +106,20 @@
                         img.setAttribute("value", value);
                         document.querySelector('.picForm:last-child').appendChild(img);
 
+                        var br = document.createElement('br');
+                        document.querySelector('.picForm:last-child').appendChild(br);
+                        document.querySelector('.picForm:last-child').appendChild(br);
+
                         var btnUpload = document.createElement('button');
                         btnUpload.setAttribute('type', 'submit');
                         btnUpload.setAttribute('name', 'upload');
                         btnUpload.setAttribute('value', link);
+                        btnUpload.setAttribute('class', 'button-gall');
                         btnUpload.appendChild(document.createTextNode("Add to Gallery"));
                         document.querySelector('.picForm:last-child').appendChild(btnUpload);
+
+                        document.querySelector('.picForm:last-child').appendChild(br);
+                        document.querySelector('.picForm:last-child').appendChild(br);
 
                     } else {
 

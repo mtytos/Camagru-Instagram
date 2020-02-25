@@ -21,7 +21,7 @@
         $onlineDB = $st->fetchColumn();
 
         if ($onlineDB == 1) {
-            header('Location: http://127.0.0.1/Camagru/view/home.php');
+            header('Location: http://localhost/view/home.php');
             exit;
         }
     }
@@ -49,6 +49,8 @@
                 <p><a class="gradient-link" href='view/reset.php'>Forggot a password?</a></p>
                 <button type="submit" id="btn-submit" value="signin">Sign in</button>
                 <p><a class="gradient-link" href='view/signup.php'>Don't have an account<br>Sign up with email</a></p>
+                <br><br><br>
+                <p><a class="gradient-link" href='view/gallery.php'>You can look at preview Gallery.<br>Tap here</a></p>
             </div>
         </div>
         <div class="footer">

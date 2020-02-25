@@ -2,25 +2,16 @@
 
 class Db {
 
-    protected $db;
+    public $db;
 
     public function __construct() {
         try {
-            // Новый вариант подключения надо обкатывать
             $dbConfig = require 'database.php';
             $this->db = new PDO($dbConfig['dsn'], $dbConfig['user'], $dbConfig['password']);
             $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-            //Рабочий вариант подключения
-            // $dbConfig = require 'dbConfig.php';
-            // $this->db = new PDO('mysql:host=' . $dbConfig['host'] . ';dbname=' . $dbConfig['dbname'] . '', $dbConfig['user'], $dbConfig['password']);
-            // $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-//            echo 'Everything is OK, connection to DATABASE was granted';
-//            echo "<br>";
         }
         catch (PDOException $e) {
-//            echo "Connection failed" . $e->getMessage();
-//            echo "<br>";
+            echo "Connection failed" . $e->getMessage();
         }
     }
 
@@ -100,11 +91,11 @@ class Db {
             $st->execute();
             $userComName = $st->fetchColumn();
 
-            echo $userComName . ": " . $total[$i]['comment'];
+            echo "<span class='gradient-link'>" . $userComName . "</span>" . ":   " . "<span style='color: coral'>" . $total[$i]['comment'] . "</span>";
             echo "<br>";
             $idDel = $total[$i]['id_comment'];
             if ($user == $checkUser[1] || $user == $total[$i]['id_user']) {
-                echo "<button type='submit' name='deleteComment' value='$idDel.$tableName'>Delete</button>";
+                echo "<button class='button-gall' type='submit' name='deleteComment' value='$idDel.$tableName'>Delete</button>";
             }
             echo "<br>";
         }

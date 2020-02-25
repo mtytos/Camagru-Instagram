@@ -88,6 +88,31 @@ try {
         echo "Creating DIR - FAILED" . $e->getMessage();
         echo "<br>";
     }
+
+    // создаю admin юзера
+    try {
+        $usermane = "admin";
+        $email = "example@example.com";
+        $password = "admin";
+        $secret1 = 'Star-9';
+        $password = md5($password . $secret1);
+        $secret2 = 'Wars-9';
+        $token = md5(date("Y-m-d H:i:s") . $secret2);
+        $status = 1;
+        $like_alert = 0;
+        $comment_alert = 0;
+        $profile_alert = 0;
+        $online = 0;
+
+        $st = $db->exec("INSERT INTO users (username, email, password, status, token, like_alert, comment_alert, profile_alert, online) VALUES('$usermane', '$email', '$password', '$status', '$token', '$like_alert', '$comment_alert', '$profile_alert', '$online')");
+        echo "Successfully user has been created - login: admin, password: admin";
+        echo "<br>";
+        echo "<p>Ewerything is ok. Now you can go to the <a href='../index.php'>Login</a> page</p>";
+    }
+    catch (PDOException $e) {
+        echo "User has not been created" . $e->getMessage();;
+    }
+
 }
 catch (PDOException $e) {
     echo "Creating or re-creating the database schema FAILED" . $e->getMessage();

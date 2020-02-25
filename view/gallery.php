@@ -8,13 +8,21 @@ $act = new Db();
 <html lang="ru">
 <head>
     <meta charset="utf-8">
-    <title>Options</title>
+    <title>Gallery</title>
     <link href="../style/styleGallery.css" rel="stylesheet">
 </head>
 <body>
 <div class="container">
+    <div class="home">
+        <p><a class="gradient-link" href="home.php">Home</a></p>
+    </div>
     <div class="header">
         <p class="gradient">CAMAGRU</p>
+    </div>
+    <div class="exit">
+        <form action="../core/logoutCore.php" method="post">
+            <button id="logout" name='exit' value='logout'>Logout</button>
+        </form>
     </div>
     <div class="content">
         <div class="main">
@@ -24,16 +32,7 @@ $act = new Db();
 
                 $chekTool = $_SESSION['logged'];
 
-                $DB_DSN = 'mysql:host=127.0.0.1;dbname=camagru';
-                $DB_USER = 'root';
-                $DB_PASSWORD = '';
-                try {
-                    $db = new PDO($DB_DSN, $DB_USER, $DB_PASSWORD);
-                    $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-                } catch (PDOException $e) {
-                }
-
-                $st = $db->prepare("SELECT online FROM users WHERE username = ?");
+                $st = $act->db->prepare("SELECT online FROM users WHERE username = ?");
                 $st->bindParam(1, $chekTool);
                 $st->execute();
                 $onlineDB = $st->fetchColumn();
@@ -43,17 +42,9 @@ $act = new Db();
                     $dir = '../IMG/'; // Папка с изображениями
                     $files = scandir($dir); // Беру всё содержимое директории
 
-                    $DB_DSN = 'mysql:host=127.0.0.1;dbname=camagru';
-                    $DB_USER = 'root';
-                    $DB_PASSWORD = '';
-                    try {
-                        $db = new PDO($DB_DSN, $DB_USER, $DB_PASSWORD);
-                        $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-                    } catch (PDOException $e) {
-                    }
                     $username = $_SESSION['logged'];
 
-                    $st = $db->prepare("SELECT id_user FROM users WHERE username = ?");
+                    $st = $act->db->prepare("SELECT id_user FROM users WHERE username = ?");
                     $st->bindParam(1, $username);
                     $st->execute();
                     $usernameDB = $st->fetchColumn();
@@ -71,29 +62,29 @@ $act = new Db();
                             $c = substr_replace($c, ".", 10, 0);
                             $c = substr($c, 0, 10);
 
-                            echo "<form method='post' action='../core/galleryCore.php'>";
+                            echo "<form method='post' action='../core/galleryCore.php' style='display: inline'>";
                             echo "<img src='$path' alt='$files[$i]' width='600' />"; // Вывод превью картинки
-                            echo "<br>";
-                            echo "Like = " . $postLike . "  |  ";
-                            echo "Comments = " . $postComment . "  |  ";
-                            echo "Posted - " . $c;
-                            echo "<br>";
+                            echo "<br><br>";
+                            echo "<span class='bulsh1'> Like = " . $postLike . "</span>";
+                            echo "<span class='bulsh2'> Comments = " . $postComment . "</span>";
+                            echo "<span class='bulsh3'> Posted - " . $c . "</span>";
+                            echo "<br><br>";
                             $btnName = "Like";
                             if ($act->btnLike($usernameDB, $files[$i])) {
                                 $btnName = 'Unlike';
                             } else {
                                 $btnName = 'Like';
                             }
-                            echo "<button type='submit' name='likebtn' value='$files[$i]'>" . $btnName . "</button>";
+                            echo "<button class='button-gall' type='submit' name='likebtn' value='$files[$i]'>" . $btnName . "</button>";
 
                             // И тут будет еще одна кнопка "УДАЛИТЬ", видима только для владельца этой фотографии
                             $checkUser = explode('.', $files[$i]);
                             if ($usernameDB == $checkUser[1]) {
-                                echo "<button type='submit' name='deletebtn' value='$files[$i]'>Delete</button>";
+                                echo "<button class='button-gall' type='submit' name='deletebtn' value='$files[$i]'>Delete</button>";
                             }
                             echo "</form>";
-                            echo "<form method='post' action='comment.php' style='display: inline-block'>";
-                            echo "<button type='submit' name='commentbtn' value='$files[$i]'>Comment</button>";
+                            echo "<form method='post' action='comment.php' style='display: inline'>";
+                            echo "<button class='button-gall' type='submit' name='commentbtn' value='$files[$i]'>Comment</button>";
                             echo "</form><br><hr><br>";
                         }
                     }
@@ -115,19 +106,19 @@ $act = new Db();
                             $c = substr_replace($c, ".", 10, 0);
                             $c = substr($c, 0, 10);
 
-                            echo "<form>";
+                            echo "<form style='display: inline'>";
                             echo "<img src='$path' alt='$files[$i]' width='600' />"; // Вывод превью картинки
-                            echo "<br>";
-                            echo "Posted - " . $c . "   ";
-                            echo "Like = " . $postLike . "   ";
-                            echo "Comments = " . $postComment;
-                            echo "<br>";
+                            echo "<br><br>";
+                            echo "<span class='bulsh1'> Like = " . $postLike . "</span>";
+                            echo "<span class='bulsh2'> Comments = " . $postComment . "</span>";
+                            echo "<span class='bulsh3'> Posted - " . $c . "</span>";
+                            echo "<br><br>";
                             $btnName = "Like";
-                            echo "<button type='button'><a href='../index.php'>Like</a></button>";
+                            echo "<button class='button-gall' type='button'><a href='../index.php'>Like</a></button>";
                             echo "</form>";
-                            echo "<form>";
-                            echo "<button type='button'><a href='../index.php'>Comment</a></button>";
-                            echo "</form>";
+                            echo "<form style='display: inline'>";
+                            echo "<button class='button-gall' type='button'><a href='../index.php'>Comment</a></button>";
+                            echo "</form><br><hr><br>";
                         }
                     }
                 }
@@ -149,19 +140,19 @@ $act = new Db();
                         $c = substr_replace($c, ".", 10, 0);
                         $c = substr($c, 0, 10);
 
-                        echo "<form>";
+                        echo "<form style='display: inline'>";
                         echo "<img src='$path' alt='$files[$i]' width='600' />"; // Вывод превью картинки
-                        echo "<br>";
-                        echo "Posted - " . $c . "   ";
-                        echo "Like = " . $postLike . "   ";
-                        echo "Comments = " . $postComment;
-                        echo "<br>";
+                        echo "<br><br>";
+                        echo "<span class='bulsh1'> Like = " . $postLike . "</span>";
+                        echo "<span class='bulsh2'> Comments = " . $postComment . "</span>";
+                        echo "<span class='bulsh3'> Posted - " . $c . "</span>";
+                        echo "<br><br>";
                         $btnName = "Like";
-                        echo "<button type='button'><a href='../index.php'>Like</a></button>";
+                        echo "<button class='button-gall' type='button'><a href='../index.php'>Like</a></button>";
                         echo "</form>";
-                        echo "<form>";
-                        echo "<button type='button'><a href='../index.php'>Comment</a></button>";
-                        echo "</form>";
+                        echo "<form style='display: inline'>";
+                        echo "<button class='button-gall' type='button'><a href='../index.php'>Comment</a></button>";
+                        echo "</form><br><hr><br>";
                     }
                 }
             }

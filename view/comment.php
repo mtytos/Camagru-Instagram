@@ -7,22 +7,13 @@ if (isset($_SESSION['logged'])) {
 
     $username = $_SESSION['logged'];
 
-    $DB_DSN = 'mysql:host=127.0.0.1;dbname=camagru';
-    $DB_USER = 'root';
-    $DB_PASSWORD = '';
-    try {
-        $db = new PDO($DB_DSN, $DB_USER, $DB_PASSWORD);
-        $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    } catch (PDOException $e) {
-    }
-
-    $st = $db->prepare("SELECT online FROM users WHERE username = ?");
+    $st = $act->db->prepare("SELECT online FROM users WHERE username = ?");
     $st->bindParam(1, $username);
     $st->execute();
     $onlineDB = $st->fetchColumn();
 
     if ($onlineDB == 0) {
-        header('Location: http://127.0.0.1/Camagru/index.php');
+        header('Location: http://localhost/index.php');
         exit;
     }
 }
@@ -37,8 +28,16 @@ if (isset($_SESSION['logged'])) {
 </head>
 <body>
 <div class="container">
+    <div class="home">
+        <p><a class="gradient-link" href="home.php">Home</a></p>
+    </div>
     <div class="header">
         <p class="gradient">CAMAGRU</p>
+    </div>
+    <div class="exit">
+        <form action="../core/logoutCore.php" method="post">
+            <button id="logout" name='exit' value='logout'>Logout</button>
+        </form>
     </div>
     <div class="content">
         <div class="main">
@@ -47,33 +46,24 @@ if (isset($_SESSION['logged'])) {
             $dir = '../IMG/'; // Папка с изображениями
             $files = scandir($dir); // Беру всё содержимое директории
 
-            $DB_DSN = 'mysql:host=127.0.0.1;dbname=camagru';
-            $DB_USER = 'root';
-            $DB_PASSWORD = '';
-            try {
-                $db = new PDO($DB_DSN, $DB_USER, $DB_PASSWORD);
-                $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            }
-            catch (PDOException $e) {
-            }
             $username = $_SESSION['logged'];
-            $st = $db->prepare("SELECT id_user FROM users WHERE username = ?");
+            $st = $act->db->prepare("SELECT id_user FROM users WHERE username = ?");
             $st->bindParam(1, $username);
             $st->execute();
             $usernameDB = $st->fetchColumn();
 
             $path = $dir . $_POST['commentbtn']; // Получаем путь к картинке
             $picname = $_POST['commentbtn'];
-            echo $picname;
             echo "<br>";
-            echo "<img src='$path' alt='#' width='400' />"; // Вывод превью картинки
+            echo "<img src='$path' alt='#' width='600' />"; // Вывод превью картинки
             $act->showComments($picname, $usernameDB);
             ?>
+            <hr>
             <form method="post" action="../core/commentCore.php">
                 <p><b>Введите ваш комментарий:</b></p>
-                <p><textarea name="commentText"></textarea></p>
+                <p><textarea name="commentText" style="min-width:600px; max-width: 600px; min-height: 50px;"></textarea></p>
                 <?php
-                echo "<button type='submit' name='btnCommentSend' value='$picname'>Send</button>";
+                echo "<button class='button-gall' type='submit' name='btnCommentSend' value='$picname'>Send</button>";
                 ?>
             </form>
         </div>

@@ -13,17 +13,17 @@ body {
     grid-template-rows: 60px 1fr 60px;
     grid-template-areas:
             "l l u u i i g g o o e e"
-            "c c c c c c c c m m m m"
+            "c c c c c c c c c m m m"
             "f f f f f f f f f f f f";
     /*text-align: center;*/
     /*min-width: 1600px;*/
     /*min-height: 1040px;*/
     min-height: 100vh;
     color: whitesmoke;
-    /* background: rgb(32, 38, 41); */
+    background: rgb(32, 38, 41);
 
     /* включаю для отладки */
-    background: rgba(236, 149, 255, 0.74);
+    /*background: rgba(236, 149, 255, 0.74);*/
     grid-gap: 2px;
 }
 
@@ -165,6 +165,48 @@ p {
     color: whitesmoke;
     background: rgb(32, 38, 41);
 }
+.forlink {
+    margin-top: 20px;
+}
+
+button {
+    background: rgb(32, 38, 41);
+    border: none;
+    border-radius: 8px;
+    color: whitesmoke;
+    cursor: pointer;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    /*    height: 40px;*/
+    width: 150px;
+    margin-left: 20px;
+    /*    margin-bottom: 10px;*/
+    /*    transition: all .3s cubic-bezier(.6,0,.4,1);*/
+    display: inline;
+}
+
+.button-gall:hover {
+    background: rgb(253, 32, 154);
+}
+
+
+#logout {
+    margin-top: 18px;
+    background: rgb(32, 38, 41);
+    color: whitesmoke;
+    border: none;
+    font-size: 14px;
+}
+
+button,
+button:active,
+button:focus {
+    outline: none;
+}
+
+.picForm {
+    text-align: center;
+}
 
 /* АНИМАЦИЯ КОНТЕНТА */
 
@@ -251,7 +293,7 @@ p {
     margin-left:auto;
     margin-right:auto;
     bottom:32px;
-    background-color: rgba(0, 150, 0, 0.5);
+    background-color: rgb(253, 32, 154);
     border: 1px solid rgba(255, 255, 255, 0.7);
     box-shadow: 0px 0px 1px 2px rgba(0, 0, 0, 0.2);
     font-size: 14px;

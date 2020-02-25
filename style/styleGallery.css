@@ -12,8 +12,8 @@ body {
     grid-template-columns: repeat(12, 1fr);
     grid-template-rows: 60px 1fr 60px;
     grid-template-areas:
-            "h h h h h h h h h h h h"
-            ". . c c c c c c c c . ."
+            "b b h h h h h h h h e e"
+            "c c c c c c c c c c c c"
             "f f f f f f f f f f f f";
     /*text-align: center;*/
     /*min-width: 1600px;*/
@@ -100,35 +100,73 @@ p {
     margin-top: 10px;
 }
 
+.exit {
+    grid-area: e;
+    background: rgb(32, 38, 41);
+    color: whitesmoke;
+    /*background: rgb(32, 38, 41);*/
+    /*color: whitesmoke;*/
+    font-size: 14px;
+    font-weight: 500;
+    text-align: center;
+    margin-top: 10px;
+}
+
+.home {
+    grid-area: b;
+    background: rgb(32, 38, 41);
+    color: whitesmoke;
+    /*background: rgb(32, 38, 41);*/
+    /*color: whitesmoke;*/
+    font-size: 14px;
+    font-weight: 500;
+    text-align: center;
+}
+
 /*.link-btn {*/
 /*    color: whitesmoke;*/
 /*}*/
 
-/*button {*/
-/*    background: rgb(112, 0, 216);*/
-/*    border: none;*/
-/*    border-radius: 8px;*/
-/*    color: #fff;*/
-/*    cursor: pointer;*/
-/*    font-family: Arial, sans-serif;*/
-/*    font-size: 16px;*/
+button {
+    background: rgb(32, 38, 41);
+    border: none;
+    border-radius: 8px;
+    color: whitesmoke;
+    cursor: pointer;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
 /*    height: 40px;*/
-/*    width: 250px;*/
-/*    margin-top: 20px;*/
+    width: 150px;
+    margin-left: 20px;
 /*    margin-bottom: 10px;*/
 /*    transition: all .3s cubic-bezier(.6,0,.4,1);*/
-/*}*/
+    display: inline;
+}
 
-/*button:hover {*/
-/*    background: rgb(253, 32, 154);*/
-/*}*/
+.button-gall:hover {
+    background: rgb(253, 32, 154);
+}
 
-/*button,*/
-/*button:active,*/
-/*button:focus {*/
-/*    outline: none;*/
-/*}*/
+button,
+button:active,
+button:focus {
+    outline: none;
+}
 
+.bulsh1 {
+    color: #dc2d2c;
+    margin-left: 20px;
+}
+
+.bulsh2 {
+    color: whitesmoke;
+    margin-left: 20px;
+}
+
+.bulsh3 {
+    color: whitesmoke;
+    margin-left: 20px;
+}
 
 /* АНИМАЦИЯ КОНТЕНТА */
 
