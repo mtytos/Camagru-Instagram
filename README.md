@@ -37,8 +37,10 @@
 - Лайки постов<br>
 - Комментарии к постам с username<br>
 - Владелец может удалить пост / комментарии<br>
-- Галерея доступна незарегистрированным пользователем в режиме просмотра без возможности взаимодействия
+- Галерея доступна незарегистрированным пользователем в режиме просмотра без возможности взаимодействия<br>
 
+##### Screenshots:<br>
 <p align="center">
-  <img align="center" src="https://raw.githubusercontent.com/mtytos/CV/master/login.png?token=ANB3U4P6IFHCSD24LH7UYQS6KV4GY">
+  <img src="https://raw.githubusercontent.com/mtytos/CV/master/login.png?token=ANB3U4P6IFHCSD24LH7UYQS6KV4GY"><br><br>
+  <img src="https://raw.githubusercontent.com/mtytos/CV/master/options.png?token=ANB3U4JTL36RBHZ2Z4BTBAC6KV43A"><br><br>
 </p>
