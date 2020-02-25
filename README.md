@@ -41,6 +41,6 @@
 
 ##### Screenshots:<br>
 <p align="center">
-  <img src="https://raw.githubusercontent.com/mtytos/CV/master/login.png?token=ANB3U4P6IFHCSD24LH7UYQS6KV4GY"><br><br>
-  <img src="https://raw.githubusercontent.com/mtytos/CV/master/options.png?token=ANB3U4JTL36RBHZ2Z4BTBAC6KV43A"><br><br>
+  <img src="https://raw.githubusercontent.com/mtytos/CV/master/login.png?token=ANB3U4OR2WAFLFY653E74PK6KV5AU"><br><br>
+  <img src="https://raw.githubusercontent.com/mtytos/CV/master/options.png?token=ANB3U4JTL36RBHZ2Z4BTBAC6KV43A">
 </p>
