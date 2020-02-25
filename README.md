@@ -1,5 +1,9 @@
 ## Camagru - упрощенный Instargram <br>
 
+<p align="center">
+  <img src="https://raw.githubusercontent.com/mtytos/CV/master/login.png?token=ANB3U4JNJ62LJMVXOJR2OLS6KV5QI">
+</p><br><br>
+
 - <b>Серверная часть</b> - PHP <br>
 - <b>База данных</b> - MySQL + PDO <br>
 - <b>Фронт</b> - HTML, CSS (Grid), JavaSript + Ajax <br>
@@ -37,10 +41,4 @@
 - Лайки постов<br>
 - Комментарии к постам с username<br>
 - Владелец может удалить пост / комментарии<br>
-- Галерея доступна незарегистрированным пользователем в режиме просмотра без возможности взаимодействия<br>
-
-##### Screenshots:<br>
-<p align="center">
-  <img src="https://raw.githubusercontent.com/mtytos/CV/master/login.png?token=ANB3U4OR2WAFLFY653E74PK6KV5AU"><br><br>
-  <img src="https://raw.githubusercontent.com/mtytos/CV/master/options.png?token=ANB3U4JTL36RBHZ2Z4BTBAC6KV43A">
-</p>
+- Галерея доступна незарегистрированным пользователем в режиме просмотра без возможности взаимодействия
