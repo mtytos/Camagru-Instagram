@@ -38,3 +38,5 @@
 - Комментарии к постам с username<br>
 - Владелец может удалить пост / комментарии<br>
 - Галерея доступна незарегистрированным пользователем в режиме просмотра без возможности взаимодействия
+
+![disign](https://raw.githubusercontent.com/mtytos/CV/master/login.png?token=ANB3U4P6IFHCSD24LH7UYQS6KV4GY)
