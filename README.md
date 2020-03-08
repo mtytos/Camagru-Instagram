@@ -46,3 +46,6 @@
 ps почистите cookie перед запуском
 
 ###### may the force be with you
+
+#### AUTHOR<br><hr>
+Ilya Mekke - Mtytos
